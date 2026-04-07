@@ -107,7 +107,7 @@ export function InfoSection() {
         className="info-panel info-panel--open"
         style={{
           display: 'grid',
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/business/background.jpg')`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/images/business/background.jpg')`,
           backgroundColor: '#0f1115', // deep slate black background
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
@@ -123,8 +123,8 @@ export function InfoSection() {
              top: 0,
              height: '100vh',
              width: '100%',
-             backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${languageData.panelBackground || 'images/business/background.jpg'}')`,
-             backgroundSize: 'contain',
+             backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${languageData.panelBackground ? (languageData.panelBackground.startsWith('/') ? languageData.panelBackground : '/' + languageData.panelBackground) : '/images/business/background.jpg'}')`,
+             backgroundSize: 'cover',
              backgroundRepeat: 'no-repeat',
              backgroundPosition: 'center',
              transform: 'translate3d(0, 0, 0)',
@@ -267,7 +267,7 @@ export function InfoSection() {
                   key={idx} 
                   className="feature-card animate-slide"
                   style={{ 
-                    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/business/background.jpg')`,
+                    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/images/business/background.jpg')`,
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'center',
@@ -378,7 +378,7 @@ export function InfoSection() {
                      marginTop: '1.5rem',
                     padding: '2.5rem',
                     scrollMarginTop: '120px',
-                    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('images/business/background.jpg')`,
+                    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('/images/business/background.jpg')`,
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'center',
@@ -444,7 +444,7 @@ export function InfoSection() {
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'center',
-                    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('images/business/background.jpg')`,
+                    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/images/business/background.jpg')`,
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'center',
@@ -626,8 +626,8 @@ function ImageCarousel({ slides, isDefault, layoutType, autoSlide = true }: { sl
               {(slide.title || slide.topText || slide.subtitle) && (
                 <div className={`carousel-overlay ${isDefault ? 'carousel-overlay--centered' : ''}`}>
                   <div className="carousel-text-box" style={{ 
-                  backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('images/business/background.jpg')`,
-                  backgroundSize: 'contain',
+                  backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('/images/business/background.jpg')`,
+                  backgroundSize: 'cover',
                   backgroundRepeat: 'no-repeat',
                   backgroundPosition: 'center',
                   padding: '1.5rem', 
