@@ -71,7 +71,7 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
+  background-color: transparent;
   overflow: hidden;
 }
 
@@ -97,7 +97,7 @@ h1 {
 
 .white-buffer {
   height: 250px;
-  background: transparent;
+  background-color: transparent;
   width: 100%;
   position: relative;
   z-index: 1;
@@ -113,7 +113,7 @@ h1 {
    INFO SECTION COMPONENT
    ────────────────────────────────────────────── */
 .info-section {
-  background: transparent;
+  background-color: transparent;
   color: var(--info-text);
   /* The section acts as a sticky container if we want it to freeze,
      but regular block level is also fine as it acts as a normal section */
