@@ -109,7 +109,7 @@ export function InfoSection() {
           display: 'grid',
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/business/background.jpg')`,
           backgroundColor: '#0f1115', // deep slate black background
-          backgroundSize: 'contain',
+          backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center'
         }}
@@ -268,7 +268,7 @@ export function InfoSection() {
                   className="feature-card animate-slide"
                   style={{ 
                     backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/business/background.jpg')`,
-                    backgroundSize: 'contain',
+                    backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'center',
                     backdropFilter: 'blur(10px)',
@@ -379,7 +379,7 @@ export function InfoSection() {
                     padding: '2.5rem',
                     scrollMarginTop: '120px',
                     backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('images/business/background.jpg')`,
-                    backgroundSize: 'contain',
+                    backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'center',
                     backdropFilter: 'blur(20px)',
@@ -445,7 +445,7 @@ export function InfoSection() {
                     flexDirection: 'column',
                     justifyContent: 'center',
                     backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('images/business/background.jpg')`,
-                    backgroundSize: 'contain',
+                    backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'center',
                     padding: '2.5rem', 
