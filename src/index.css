@@ -85,10 +85,10 @@ h1 {
 .video-scroll-canvas-wrapper {
   /* This centers the animation and leaves area/margin from the sides */
   width: 100%;
-  max-width: 1400px; /* Wider for full cinematic scale */
-  padding: 0 clamp(1rem, 5vw, 4rem);
+  max-width: 1200px;
+  padding: 0 5vw;
   /* responsiveness on mobile/desktop margins */
-  height: 100svh;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;

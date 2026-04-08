@@ -21,40 +21,27 @@ export function VideoScroll({ frameCount, frameUrlPattern, scrollHeight = '700vh
     if (!canvasRef.current || !containerRef.current || frameCount === 0) return;
 
     const canvas = canvasRef.current;
-    // CRITICAL: alpha:true required for blending
-    const ctx = canvas.getContext('2d', { alpha: true })!;
+    const ctx = canvas.getContext('2d', { alpha: false })!;
 
     const setup = (img: HTMLImageElement) => {
       const dpr = window.devicePixelRatio || 1;
-      const w = img.naturalWidth;
-      const h = img.naturalHeight;
+      const w = img.naturalWidth || 1920;
+      const h = img.naturalHeight || 1080;
       canvas.width = w * dpr;
       canvas.height = h * dpr;
-      canvas.style.width = w + 'px';
-      canvas.style.height = h + 'px';
+      // Do not set pixel style width/height here; let CSS handle responsive sizing
       ctx.scale(dpr, dpr);
       return { w, h };
     };
 
-    const drawBlended = (rawFrame: number, w: number, h: number) => {
-      const lo = Math.floor(rawFrame);
-      const hi = Math.min(lo + 1, frameCount - 1);
-      const blend = rawFrame - lo;
+    const drawFrame = (rawFrame: number, w: number, h: number) => {
+      const targetIdx = Math.round(rawFrame);
+      const img = imagesRef.current[targetIdx];
 
-      const loImg = imagesRef.current[lo];
-      const hiImg = imagesRef.current[hi];
-
-      ctx.clearRect(0, 0, w, h);
-
-      if (loImg?.complete && loImg.naturalWidth > 0) {
-        ctx.globalAlpha = 1 - blend;
-        ctx.drawImage(loImg, 0, 0, w, h);
+      if (img?.complete && img.naturalWidth > 0) {
+        ctx.clearRect(0, 0, w, h);
+        ctx.drawImage(img, 0, 0, w, h);
       }
-      if (hi !== lo && hiImg?.complete && hiImg.naturalWidth > 0) {
-        ctx.globalAlpha = blend;
-        ctx.drawImage(hiImg, 0, 0, w, h);
-      }
-      ctx.globalAlpha = 1;
     };
 
     const firstImg = new Image();
@@ -84,6 +71,7 @@ export function VideoScroll({ frameCount, frameUrlPattern, scrollHeight = '700vh
       }, 150);
 
       // GSAP: low scrub = near-instant response, no inertia
+      let lastRendered = -1;
       const obj = { f: 0 };
       gsap.timeline({
         scrollTrigger: {
@@ -97,7 +85,11 @@ export function VideoScroll({ frameCount, frameUrlPattern, scrollHeight = '700vh
         ease: 'none',
         onUpdate() {
           rawFrameRef.current = obj.f;
-          drawBlended(obj.f, w, h); // Draw directly in GSAP tick
+          const rounded = Math.round(obj.f);
+          if (rounded !== lastRendered) {
+             drawFrame(obj.f, w, h); // Draw exactly the single frame
+             lastRendered = rounded;
+          }
         },
       });
     };
