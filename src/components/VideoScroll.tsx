@@ -10,126 +10,112 @@ interface VideoScrollProps {
   scrollHeight?: string;
 }
 
-export function VideoScroll({
-  frameCount,
-  frameUrlPattern,
-  scrollHeight = '500vh',
-}: VideoScrollProps) {
+export function VideoScroll({ frameCount, frameUrlPattern, scrollHeight = '700vh' }: VideoScrollProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
-  const [firstFrameReady, setFirstFrameReady] = useState(false);
-  const targetFrameRef = useRef(0);
-  const currentFrameRef = useRef(0);
-  const requestRef = useRef<number>(null);
+  const rawFrameRef = useRef(0); // floating-point target from GSAP
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     if (!canvasRef.current || !containerRef.current || frameCount === 0) return;
 
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d', { alpha: false })!;
+    // CRITICAL: alpha:true required for blending
+    const ctx = canvas.getContext('2d', { alpha: true })!;
 
-    const resizeCanvas = (img: HTMLImageElement) => {
+    const setup = (img: HTMLImageElement) => {
       const dpr = window.devicePixelRatio || 1;
-      canvas.width = img.width * dpr;
-      canvas.height = img.height * dpr;
+      const w = img.naturalWidth;
+      const h = img.naturalHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      canvas.style.width = w + 'px';
+      canvas.style.height = h + 'px';
       ctx.scale(dpr, dpr);
+      return { w, h };
     };
 
-    // Load first frame immediately
+    const drawBlended = (rawFrame: number, w: number, h: number) => {
+      const lo = Math.floor(rawFrame);
+      const hi = Math.min(lo + 1, frameCount - 1);
+      const blend = rawFrame - lo;
+
+      const loImg = imagesRef.current[lo];
+      const hiImg = imagesRef.current[hi];
+
+      ctx.clearRect(0, 0, w, h);
+
+      if (loImg?.complete && loImg.naturalWidth > 0) {
+        ctx.globalAlpha = 1 - blend;
+        ctx.drawImage(loImg, 0, 0, w, h);
+      }
+      if (hi !== lo && hiImg?.complete && hiImg.naturalWidth > 0) {
+        ctx.globalAlpha = blend;
+        ctx.drawImage(hiImg, 0, 0, w, h);
+      }
+      ctx.globalAlpha = 1;
+    };
+
     const firstImg = new Image();
     firstImg.src = frameUrlPattern(0);
     firstImg.onload = () => {
       imagesRef.current[0] = firstImg;
-      resizeCanvas(firstImg);
-      ctx.drawImage(firstImg, 0, 0, firstImg.width, firstImg.height);
-      setFirstFrameReady(true);
+      const { w, h } = setup(firstImg);
+      ctx.drawImage(firstImg, 0, 0, w, h);
+      setVisible(true);
 
-      // Optimized Batch Preloading
-      // Load first 5 frames for immediate playback potential
-      for (let i = 1; i < Math.min(6, frameCount); i++) {
+      // Priority: load frames 1-10 immediately
+      for (let i = 1; i <= Math.min(10, frameCount - 1); i++) {
         const img = new Image();
         img.src = frameUrlPattern(i);
         imagesRef.current[i] = img;
       }
 
-      // Load the rest in small batches after a short delay
-      setTimeout(() => {
-        let currentBatch = 6;
-        const batchSize = 5;
-        const interval = setInterval(() => {
-          if (currentBatch >= frameCount) {
-            clearInterval(interval);
-            return;
-          }
-          for (let i = currentBatch; i < Math.min(currentBatch + batchSize, frameCount); i++) {
-            const img = new Image();
-            img.src = frameUrlPattern(i);
-            imagesRef.current[i] = img;
-          }
-          currentBatch += batchSize;
-        }, 100); // Load 5 frames every 100ms
-      }, 500);
+      // Background: batch-load remaining frames
+      let cursor = 11;
+      const batchInterval = setInterval(() => {
+        for (let j = 0; j < 5 && cursor < frameCount; j++, cursor++) {
+          const img = new Image();
+          img.src = frameUrlPattern(cursor);
+          imagesRef.current[cursor] = img;
+        }
+        if (cursor >= frameCount) clearInterval(batchInterval);
+      }, 150);
 
-      // Setup GSAP scroll trigger
+      // GSAP: low scrub = near-instant response, no inertia
       const obj = { f: 0 };
-      const tl = gsap.timeline({
+      gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top top',
           end: 'bottom bottom',
-          scrub: 1, // Base scrub
+          scrub: 0.2, // KEY: low value = instant follow, no drift
         }
-      });
-
-      tl.to(obj, {
+      }).to(obj, {
         f: frameCount - 1,
         ease: 'none',
-        duration: 0.9,
         onUpdate() {
-          targetFrameRef.current = obj.f;
+          rawFrameRef.current = obj.f;
+          drawBlended(obj.f, w, h); // Draw directly in GSAP tick
         },
-      }).to({}, { duration: 0.1 });
-
-      // Temporal Smoothing Loop (The "Drift" Paradigm)
-      let lastRenderedFrame = -1;
-      const render = () => {
-        // Linear Interpolation (lerp)
-        // 0.1 is the damping factor; smaller = smoother/floatier
-        const damping = 0.08; 
-        currentFrameRef.current += (targetFrameRef.current - currentFrameRef.current) * damping;
-
-        const frameToRender = Math.round(currentFrameRef.current);
-        
-        if (frameToRender !== lastRenderedFrame) {
-          const img = imagesRef.current[frameToRender];
-          if (img && img.complete && img.naturalWidth > 0) {
-            ctx.clearRect(0, 0, firstImg.width, firstImg.height);
-            ctx.drawImage(img, 0, 0, firstImg.width, firstImg.height);
-            lastRenderedFrame = frameToRender;
-          }
-        }
-        requestRef.current = requestAnimationFrame(render);
-      };
-
-      requestRef.current = requestAnimationFrame(render);
+      });
     };
 
     return () => {
-      if (requestRef.current) cancelAnimationFrame(requestRef.current);
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+      ScrollTrigger.getAll().forEach(t => t.kill());
       imagesRef.current = [];
     };
   }, [frameCount, frameUrlPattern]);
 
   return (
-    <div ref={containerRef} className="video-scroll-container" style={{ height: scrollHeight, position: 'relative' }}>
+    <div ref={containerRef} style={{ height: scrollHeight, position: 'relative' }}>
       <div className="video-scroll-sticky">
         <div className="video-scroll-canvas-wrapper">
           <canvas
             ref={canvasRef}
             className="video-scroll-canvas"
-            style={{ opacity: firstFrameReady ? 1 : 0 }}
+            style={{ opacity: visible ? 1 : 0, transition: 'opacity 0.5s ease' }}
           />
         </div>
       </div>

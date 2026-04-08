@@ -26,6 +26,12 @@ body {
   font-family: 'Inter', sans-serif;
   overflow-x: clip;
   -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+}
+
+html {
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: auto;
 }
 
 /* Fix for mobile/cross-browser 'fixed' background pattern */
@@ -67,21 +73,22 @@ h1 {
 .video-scroll-sticky {
   position: sticky;
   top: 0;
-  height: 100vh;
+  height: 100svh;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: transparent;
   overflow: hidden;
+  will-change: transform;
 }
 
 .video-scroll-canvas-wrapper {
   /* This centers the animation and leaves area/margin from the sides */
   width: 100%;
-  max-width: 1200px;
-  padding: 0 5vw;
+  max-width: 1400px; /* Wider for full cinematic scale */
+  padding: 0 clamp(1rem, 5vw, 4rem);
   /* responsiveness on mobile/desktop margins */
-  height: 100vh;
+  height: 100svh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -93,6 +100,8 @@ h1 {
   object-fit: contain;
   /* maintains aspect ratio without cropping */
   transition: opacity 0.5s ease;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .white-buffer {
@@ -137,6 +146,8 @@ h1 {
   gap: 1rem;
   z-index: 2;
   position: relative;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .info-btn {
@@ -157,9 +168,11 @@ h1 {
   font-family: inherit;
 }
 
-.info-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+@media (hover: hover) and (pointer: fine) {
+  .info-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  }
 }
 
 .info-btn:active {
@@ -179,9 +192,11 @@ h1 {
   transform: scale(0.96) translateY(-2px);
 }
 
-.info-btn--active:hover {
-  background: #000000 !important;
-  color: #ffffff !important;
+@media (hover: hover) and (pointer: fine) {
+  .info-btn--active:hover {
+    background: #000000 !important;
+    color: #ffffff !important;
+  }
 }
 
 .info-panel {
@@ -592,11 +607,13 @@ h1 {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.carousel-ctrl-btn:hover {
-  background: #333;
-  color: white;
-  border-color: #333;
-  transform: scale(1.1);
+@media (hover: hover) and (pointer: fine) {
+  .carousel-ctrl-btn:hover {
+    background: #333;
+    color: white;
+    border-color: #333;
+    transform: scale(1.1);
+  }
 }
 
 .carousel-ctrl-btn:active {

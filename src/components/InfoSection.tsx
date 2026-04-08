@@ -61,11 +61,13 @@ export function InfoSection() {
         }, 200);
       };
 
-    if ('requestIdleCallback' in window) {
-      (window as any).requestIdleCallback(preload);
-    } else {
-      setTimeout(preload, 200);
-    }
+    setTimeout(() => {
+      if ('requestIdleCallback' in window) {
+        (window as any).requestIdleCallback(preload);
+      } else {
+        preload();
+      }
+    }, 2000);
   }, []);
 
   const currentSection = INFO_CONTENT[activeId ?? 'default'] ?? INFO_CONTENT['default'];
