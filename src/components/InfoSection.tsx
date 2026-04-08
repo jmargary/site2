@@ -33,38 +33,38 @@ export function InfoSection() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Eagerly preload category images on mount — optimized with batching.
+  // Eagerly preload ALL category images on mount — eliminates first-click latency.
+  // Uses requestIdleCallback so it doesn't block the main thread.
   useEffect(() => {
-    const preload = () => {
-      const allUrls = new Set<string>();
-      Object.values(INFO_CONTENT).forEach(section => {
-        Object.values(section.content).forEach(langData => {
-          langData.slides?.forEach(s => allUrls.add(s.imageUrl));
-          langData.alternatingList?.forEach(s => allUrls.add(s.imageUrl));
-          langData.featureGrid?.forEach(s => allUrls.add(s.imageUrl));
-          langData.plansData?.forEach(s => { if (s.imageUrl) allUrls.add(s.imageUrl); });
+      const preload = () => {
+        const allUrls = Array.from(new Set<string>());
+        Object.values(INFO_CONTENT).forEach(section => {
+          Object.values(section.content).forEach(langData => {
+            langData.slides?.forEach(s => allUrls.push(s.imageUrl));
+            langData.alternatingList?.forEach(s => allUrls.push(s.imageUrl));
+            langData.featureGrid?.forEach(s => allUrls.push(s.imageUrl));
+            langData.plansData?.forEach(s => { if (s.imageUrl) allUrls.push(s.imageUrl); });
+          });
         });
-      });
-      
-      const urlList = Array.from(allUrls);
-      const batchPreload = (start: number) => {
+        
+        // Batch loading: 3 images every 200ms
+        let index = 0;
         const batchSize = 3;
-        const end = Math.min(start + batchSize, urlList.length);
-        for (let i = start; i < end; i++) {
-          new Image().src = urlList[i];
-        }
-        if (end < urlList.length) {
-          setTimeout(() => batchPreload(end), 1000);
-        }
+        const batchInterval = setInterval(() => {
+          if (index >= allUrls.length) {
+            clearInterval(batchInterval);
+            return;
+          }
+          for (let i = 0; i < batchSize && index < allUrls.length; i++) {
+            new Image().src = allUrls[index++];
+          }
+        }, 200);
       };
-
-      batchPreload(0);
-    };
 
     if ('requestIdleCallback' in window) {
       (window as any).requestIdleCallback(preload);
     } else {
-      setTimeout(preload, 1000);
+      setTimeout(preload, 200);
     }
   }, []);
 

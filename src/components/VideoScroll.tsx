@@ -19,17 +19,18 @@ export function VideoScroll({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
   const [firstFrameReady, setFirstFrameReady] = useState(false);
+  const targetFrameRef = useRef(0);
+  const currentFrameRef = useRef(0);
+  const requestRef = useRef<number>(null);
 
   useEffect(() => {
     if (!canvasRef.current || !containerRef.current || frameCount === 0) return;
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d', { alpha: false })!;
-    
-    // Scale canvas for High DPI (Retina) displays
-    const dpr = window.devicePixelRatio || 1;
-    
-    const setCanvasSize = (img: HTMLImageElement) => {
+
+    const resizeCanvas = (img: HTMLImageElement) => {
+      const dpr = window.devicePixelRatio || 1;
       canvas.width = img.width * dpr;
       canvas.height = img.height * dpr;
       ctx.scale(dpr, dpr);
@@ -40,75 +41,82 @@ export function VideoScroll({
     firstImg.src = frameUrlPattern(0);
     firstImg.onload = () => {
       imagesRef.current[0] = firstImg;
-      setCanvasSize(firstImg);
+      resizeCanvas(firstImg);
       ctx.drawImage(firstImg, 0, 0, firstImg.width, firstImg.height);
       setFirstFrameReady(true);
 
-      // Preload remaining frames in batches to prevent network choking
-      const preloadBatch = (start: number, size: number) => {
-        const end = Math.min(start + size, frameCount);
-        for (let i = start; i < end; i++) {
-          const img = new Image();
-          img.src = frameUrlPattern(i);
-          imagesRef.current[i] = img;
-        }
-        if (end < frameCount) {
-          setTimeout(() => preloadBatch(end, size), 500); // Batch every 500ms
-        }
-      };
-      
-      // Start batching after the first frame is rendered
-      if ('requestIdleCallback' in window) {
-        window.requestIdleCallback(() => preloadBatch(1, 4));
-      } else {
-        setTimeout(() => preloadBatch(1, 4), 1000);
+      // Optimized Batch Preloading
+      // Load first 5 frames for immediate playback potential
+      for (let i = 1; i < Math.min(6, frameCount); i++) {
+        const img = new Image();
+        img.src = frameUrlPattern(i);
+        imagesRef.current[i] = img;
       }
 
-      // Detection for touch devices to increase smoothing
-      const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-      
-      // Setup GSAP scroll trigger timeline
+      // Load the rest in small batches after a short delay
+      setTimeout(() => {
+        let currentBatch = 6;
+        const batchSize = 5;
+        const interval = setInterval(() => {
+          if (currentBatch >= frameCount) {
+            clearInterval(interval);
+            return;
+          }
+          for (let i = currentBatch; i < Math.min(currentBatch + batchSize, frameCount); i++) {
+            const img = new Image();
+            img.src = frameUrlPattern(i);
+            imagesRef.current[i] = img;
+          }
+          currentBatch += batchSize;
+        }, 100); // Load 5 frames every 100ms
+      }, 500);
+
+      // Setup GSAP scroll trigger
       const obj = { f: 0 };
-      
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top top',
           end: 'bottom bottom',
-          scrub: isTouch ? 2.5 : 1.2, // More smoothing on touch devices
+          scrub: 1, // Base scrub
         }
       });
 
       tl.to(obj, {
         f: frameCount - 1,
         ease: 'none',
-        duration: 0.9, // 90% of scroll triggers the video
+        duration: 0.9,
         onUpdate() {
-          const currentF = obj.f;
-          const index = Math.floor(currentF);
-          const nextIndex = Math.min(index + 1, frameCount - 1);
-          const ratio = currentF - index;
-
-          // Clear and draw lower frame
-          const img1 = imagesRef.current[index];
-          const img2 = imagesRef.current[nextIndex];
-
-          if (img1 && img1.complete) {
-            ctx.globalAlpha = 1;
-            ctx.drawImage(img1, 0, 0, img1.width, img1.height);
-            
-            // Draw next frame with alpha for interpolation (the "smoothing" secret)
-            if (ratio > 0.05 && img2 && img2.complete) {
-              ctx.globalAlpha = ratio;
-              ctx.drawImage(img2, 0, 0, img2.width, img2.height);
-            }
-          }
+          targetFrameRef.current = obj.f;
         },
-      })
-      .to({}, { duration: 0.1 }); /* Last 10% hold frame */
+      }).to({}, { duration: 0.1 });
+
+      // Temporal Smoothing Loop (The "Drift" Paradigm)
+      let lastRenderedFrame = -1;
+      const render = () => {
+        // Linear Interpolation (lerp)
+        // 0.1 is the damping factor; smaller = smoother/floatier
+        const damping = 0.08; 
+        currentFrameRef.current += (targetFrameRef.current - currentFrameRef.current) * damping;
+
+        const frameToRender = Math.round(currentFrameRef.current);
+        
+        if (frameToRender !== lastRenderedFrame) {
+          const img = imagesRef.current[frameToRender];
+          if (img && img.complete && img.naturalWidth > 0) {
+            ctx.clearRect(0, 0, firstImg.width, firstImg.height);
+            ctx.drawImage(img, 0, 0, firstImg.width, firstImg.height);
+            lastRenderedFrame = frameToRender;
+          }
+        }
+        requestRef.current = requestAnimationFrame(render);
+      };
+
+      requestRef.current = requestAnimationFrame(render);
     };
 
     return () => {
+      if (requestRef.current) cancelAnimationFrame(requestRef.current);
       ScrollTrigger.getAll().forEach((t) => t.kill());
       imagesRef.current = [];
     };

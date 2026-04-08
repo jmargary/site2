@@ -41,15 +41,6 @@ body::after {
   background-repeat: repeat;
   z-index: -1;
   pointer-events: none;
-  /* GPU acceleration for background pattern */
-  will-change: transform;
-  transform: translateZ(0);
-}
-
-/* Touch feedback for all buttons */
-button:active {
-  transform: scale(0.96) !important;
-  transition: transform 0.1s ease-out !important;
 }
 
 /* Typography Enhancements */
@@ -57,7 +48,7 @@ h1 {
   font-size: clamp(2.5rem, 10vw, 6rem);
   font-weight: 900;
   letter-spacing: -0.04em;
-  line-height: 1.05;
+  line-height: 1.1;
   background: linear-gradient(180deg, #111 0%, #555 100%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -157,7 +148,7 @@ h1 {
   padding: 1.25rem 1.5rem;
   border-radius: 9999px;
   /* capsule/pill shape */
-  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-size: 1.1rem;
   font-weight: 600;
   text-align: left;
   cursor: pointer;
@@ -171,12 +162,21 @@ h1 {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 }
 
+.info-btn:active {
+  transform: scale(0.96);
+  background: rgba(255, 255, 255, 0.15);
+}
+
 .info-btn--active {
   background: #000000;
   color: #ffffff;
   border: 1px solid #d4af37;
   transform: translateY(-2px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.info-btn--active:active {
+  transform: scale(0.96) translateY(-2px);
 }
 
 .info-btn--active:hover {
@@ -197,8 +197,6 @@ h1 {
   width: 100%;
   height: 100%;
   padding: 4rem;
-  padding-left: calc(4rem + env(safe-area-inset-left, 0px));
-  padding-right: calc(4rem + env(safe-area-inset-right, 0px));
   overflow-y: auto;
   contain: content;
   transform: translateZ(0);
@@ -223,21 +221,21 @@ h1 {
 }
 
 .info-panel-title {
-  font-size: clamp(1.8rem, 6vw, 3.5rem);
+  font-size: clamp(2rem, 6vw, 3.5rem);
   font-weight: 900;
   margin-bottom: 0.5rem;
   letter-spacing: -0.02em;
 }
 
 .info-panel-subtitle {
-  font-size: clamp(1rem, 3vw, 1.5rem);
+  font-size: 1.5rem;
   color: rgba(0, 0, 0, 0.6);
   margin-bottom: 2rem;
   font-weight: 400;
 }
 
 .info-panel-desc {
-  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-size: 1.25rem;
   line-height: 1.6;
   max-width: 800px;
   color: rgba(0, 0, 0, 0.8);
@@ -279,8 +277,7 @@ h1 {
 
   .info-panel-content {
     position: relative;
-    padding: 2.5rem 1.25rem;
-    padding-bottom: calc(4rem + env(safe-area-inset-bottom, 20px));
+    padding: 2.5rem 1.5rem;
     overflow-y: visible;
     height: auto;
     min-height: auto;
@@ -288,9 +285,8 @@ h1 {
   }
 
   .info-panel-title {
-    font-size: clamp(2.2rem, 8vw, 2.8rem);
+    font-size: 2.2rem;
     word-wrap: break-word;
-    letter-spacing: -0.03em;
   }
 }
 
@@ -603,6 +599,10 @@ h1 {
   transform: scale(1.1);
 }
 
+.carousel-ctrl-btn:active {
+  transform: scale(0.9);
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -669,15 +669,6 @@ h1 {
   }
 
   .alternating-row-text {
-    padding: 2rem 1.25rem !important;
-  }
-}
-
-/* Fix for "sticky" hover on mobile */
-@media (hover: none) {
-  .info-btn:hover,
-  .carousel-ctrl-btn:hover,
-  .grid-item:hover {
-    transform: none !important;
+    padding: 1.5rem !important;
   }
 }
