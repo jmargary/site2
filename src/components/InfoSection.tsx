@@ -33,8 +33,7 @@ export function InfoSection() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Eagerly preload ALL category images on mount — eliminates first-click latency.
-  // Uses requestIdleCallback so it doesn't block the main thread.
+  // Eagerly preload category images on mount — optimized with batching.
   useEffect(() => {
     const preload = () => {
       const allUrls = new Set<string>();
@@ -46,13 +45,26 @@ export function InfoSection() {
           langData.plansData?.forEach(s => { if (s.imageUrl) allUrls.add(s.imageUrl); });
         });
       });
-      allUrls.forEach(url => { new Image().src = url; });
+      
+      const urlList = Array.from(allUrls);
+      const batchPreload = (start: number) => {
+        const batchSize = 3;
+        const end = Math.min(start + batchSize, urlList.length);
+        for (let i = start; i < end; i++) {
+          new Image().src = urlList[i];
+        }
+        if (end < urlList.length) {
+          setTimeout(() => batchPreload(end), 1000);
+        }
+      };
+
+      batchPreload(0);
     };
 
     if ('requestIdleCallback' in window) {
       (window as any).requestIdleCallback(preload);
     } else {
-      setTimeout(preload, 200);
+      setTimeout(preload, 1000);
     }
   }, []);
 
