@@ -24,7 +24,6 @@ function App() {
         <VideoScroll
           frameCount={77}
           frameUrlPattern={frameUrl}
-          scrollHeight="300vh"
         />
 
         {/* White wide spacer section after animation */}
