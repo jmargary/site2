@@ -70,27 +70,43 @@ export function VideoScroll({ frameCount, frameUrlPattern, scrollHeight = '700vh
         if (cursor >= frameCount) clearInterval(batchInterval);
       }, 150);
 
-      // GSAP: low scrub = near-instant response, no inertia
-      let lastRendered = -1;
+      // GSAP: 3-phase animation with constant velocity and snapping
       const obj = { f: 0 };
-      gsap.timeline({
+      const totalF = frameCount - 1; // 76
+      
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top top',
           end: 'bottom bottom',
-          scrub: 0.2, // KEY: low value = instant follow, no drift
-        }
-      }).to(obj, {
-        f: frameCount - 1,
-        ease: 'none',
-        onUpdate() {
-          rawFrameRef.current = obj.f;
-          const rounded = Math.round(obj.f);
-          if (rounded !== lastRendered) {
-             drawFrame(obj.f, w, h); // Draw exactly the single frame
-             lastRendered = rounded;
+          scrub: 0.3, // Slightly higher scrub for smooth snap transitions
+          snap: {
+            snapTo: [0, 12 / totalF, 38 / totalF, 1],
+            duration: { min: 0.4, max: 0.8 },
+            ease: "power1.inOut"
           }
-        },
+        }
+      });
+
+      // Total duration of 1.0 represents the whole scrollTrigger span
+      // We divide the duration proportionally to frame counts to keep velocity constant
+      tl.to(obj, {
+        f: 12,
+        duration: 12 / totalF,
+        ease: 'none',
+        onUpdate: () => drawFrame(obj.f, w, h)
+      })
+      .to(obj, {
+        f: 38,
+        duration: (38 - 12) / totalF,
+        ease: 'none',
+        onUpdate: () => drawFrame(obj.f, w, h)
+      })
+      .to(obj, {
+        f: totalF,
+        duration: (totalF - 38) / totalF,
+        ease: 'none',
+        onUpdate: () => drawFrame(obj.f, w, h)
       });
     };
 
