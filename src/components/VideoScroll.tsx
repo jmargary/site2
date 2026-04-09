@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Observer } from 'gsap/all';
 
-gsap.registerPlugin(ScrollTrigger, Observer);
+gsap.registerPlugin(ScrollTrigger);
 
 interface VideoScrollProps {
   frameCount: number;
@@ -11,7 +10,7 @@ interface VideoScrollProps {
   scrollHeight?: string;
 }
 
-export function VideoScroll({ frameCount, frameUrlPattern, scrollHeight = '100vh' }: VideoScrollProps) {
+export function VideoScroll({ frameCount, frameUrlPattern, scrollHeight = '400vh' }: VideoScrollProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
@@ -43,10 +42,6 @@ export function VideoScroll({ frameCount, frameUrlPattern, scrollHeight = '100vh
       }
     };
 
-    // Observers and Cleanup Storage
-    let obs: globalThis.Observer | null = null;
-    let onWindowScroll: (() => void) | null = null;
-
     const firstImg = new Image();
     firstImg.src = frameUrlPattern(0);
     firstImg.onload = () => {
@@ -73,74 +68,47 @@ export function VideoScroll({ frameCount, frameUrlPattern, scrollHeight = '100vh
         if (cursor >= frameCount) clearInterval(batchInterval);
       }, 150);
 
-      // Event-driven Phase logic
-      let animating = false;
-      let currentIndex = 0;
-      const phases = [0, 12, 38, frameCount - 1];
-      const frameObj = { f: 0 };
-
-      const gotoPhase = (index: number) => {
-        animating = true;
-        const framesToPlay = Math.abs(phases[index] - phases[currentIndex]);
-        const duration = framesToPlay * 0.04; // Constant velocity: 0.04s per frame
-        
-        gsap.to(frameObj, {
-          f: phases[index],
-          duration: duration,
-          ease: "power1.inOut",
-          onUpdate: () => drawFrame(frameObj.f, w, h),
-          onComplete: () => {
-            animating = false;
-            currentIndex = index;
-            // When we reach the final phase, allow normal page scrolling
-            if (currentIndex === phases.length - 1 && document.body.style.overflow === 'hidden') {
-              if (obs) obs.disable();
-              document.body.style.overflow = 'auto';
-            }
-          }
-        });
-      };
-
-      // Ensure we start locked since video is at the top of the page
-      document.body.style.overflow = 'hidden';
+      // GSAP: 3-phase animation with constant velocity and snapping
+      const obj = { f: 0 };
+      const totalF = frameCount - 1; // 76
       
-      obs = Observer.create({
-        target: window,
-        type: "wheel,touch,pointer",
-        wheelSpeed: -1,
-        tolerance: 30, // threshold to trigger Phase 1
-        preventDefault: true, // completely block default scroll behavior when active
-        onUp: () => { // User gesture indicates "scroll down"
-          if (!animating && currentIndex < phases.length - 1) {
-            gotoPhase(currentIndex + 1);
-          } else if (!animating && currentIndex === phases.length - 1) {
-            if (obs) obs.disable();
-            document.body.style.overflow = 'auto';
-          }
-        },
-        onDown: () => { // User gesture indicates "scroll up"
-          if (!animating && currentIndex > 0) {
-            gotoPhase(currentIndex - 1);
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: 0.1, // Near-instant follow for responsive feel
+          snap: {
+            snapTo: [0, 12 / totalF, 38 / totalF, 1],
+            duration: { min: 0.4, max: 0.8 },
+            ease: "power2.inOut"
           }
         }
       });
 
-      // Handle scrolling back up to the top of the page from other sections
-      onWindowScroll = () => {
-        if (window.scrollY <= 5 && currentIndex === phases.length - 1 && (!obs || !obs.isEnabled)) {
-          window.scrollTo(0, 0); // snap cleanly to top
-          document.body.style.overflow = 'hidden';
-          if (obs) obs.enable();
-        }
-      };
-
-      window.addEventListener('scroll', onWindowScroll);
+      // Maintain constant velocity by using frame-based durations
+      tl.to(obj, {
+        f: 12,
+        duration: 12 / totalF,
+        ease: 'none',
+        onUpdate: () => drawFrame(obj.f, w, h)
+      })
+      .to(obj, {
+        f: 38,
+        duration: (38 - 12) / totalF,
+        ease: 'none',
+        onUpdate: () => drawFrame(obj.f, w, h)
+      })
+      .to(obj, {
+        f: totalF,
+        duration: (totalF - 38) / totalF,
+        ease: 'none',
+        onUpdate: () => drawFrame(obj.f, w, h)
+      });
     };
 
     return () => {
-      if (obs) obs.kill();
-      document.body.style.overflow = 'auto';
-      if (onWindowScroll) window.removeEventListener('scroll', onWindowScroll);
+      ScrollTrigger.getAll().forEach(t => t.kill());
       imagesRef.current = [];
     };
   }, [frameCount, frameUrlPattern]);
@@ -159,3 +127,4 @@ export function VideoScroll({ frameCount, frameUrlPattern, scrollHeight = '100vh
     </div>
   );
 }
+
