@@ -10,7 +10,7 @@ interface VideoScrollProps {
   scrollHeight?: string;
 }
 
-export function VideoScroll({ frameCount, frameUrlPattern, scrollHeight = '400vh' }: VideoScrollProps) {
+export function VideoScroll({ frameCount, frameUrlPattern, scrollHeight = '300vh' }: VideoScrollProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
@@ -68,42 +68,47 @@ export function VideoScroll({ frameCount, frameUrlPattern, scrollHeight = '400vh
         if (cursor >= frameCount) clearInterval(batchInterval);
       }, 150);
 
-      // GSAP: 3-phase animation with constant velocity and snapping
-      const obj = { f: 0 };
-      const totalF = frameCount - 1; // 76
-      
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top top',
-          end: 'bottom bottom',
-          scrub: 0.1, // Near-instant follow for responsive feel
-          snap: {
-            snapTo: [0, 12 / totalF, 38 / totalF, 1],
-            duration: { min: 0.4, max: 0.8 },
-            ease: "power2.inOut"
+      // Phase playback with constant velocity, purely threshold-triggered
+      const frameObj = { f: 0 };
+      const phases = [0, 12, 38, frameCount - 1];
+      let currentPhase = 0;
+
+      const animateToPhase = (phaseIndex: number) => {
+        const targetFrame = phases[phaseIndex];
+        const framesToPlay = Math.abs(targetFrame - frameObj.f);
+        const duration = framesToPlay * 0.04; 
+        
+        gsap.to(frameObj, {
+          f: targetFrame,
+          duration: Math.max(duration, 0.2), 
+          ease: "power2.inOut",
+          onUpdate: () => drawFrame(frameObj.f, w, h),
+          overwrite: true 
+        });
+      };
+
+      ScrollTrigger.create({
+        trigger: containerRef.current,
+        start: 'top top',
+        end: 'bottom bottom',
+        onUpdate: (self) => {
+          let targetPhase = 0;
+          
+          if (self.progress === 0) {
+            targetPhase = 0;
+          } else if (self.progress <= 0.333) {
+            targetPhase = 1;
+          } else if (self.progress <= 0.666) {
+            targetPhase = 2;
+          } else {
+            targetPhase = 3;
+          }
+          
+          if (currentPhase !== targetPhase) {
+            currentPhase = targetPhase;
+            animateToPhase(targetPhase);
           }
         }
-      });
-
-      // Maintain constant velocity by using frame-based durations
-      tl.to(obj, {
-        f: 12,
-        duration: 12 / totalF,
-        ease: 'none',
-        onUpdate: () => drawFrame(obj.f, w, h)
-      })
-      .to(obj, {
-        f: 38,
-        duration: (38 - 12) / totalF,
-        ease: 'none',
-        onUpdate: () => drawFrame(obj.f, w, h)
-      })
-      .to(obj, {
-        f: totalF,
-        duration: (totalF - 38) / totalF,
-        ease: 'none',
-        onUpdate: () => drawFrame(obj.f, w, h)
       });
     };
 
