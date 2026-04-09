@@ -9,9 +9,9 @@ import './index.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Matches: frame_00.webp ... frame_76.webp (77 frames)
+// Matches: frame_000.webp ... frame_158.webp (159 frames)
 const frameUrl = (index: number) =>
-  `frames/frame_${String(index).padStart(2, '0')}.webp`;
+  `frames/frame_${String(index).padStart(3, '0')}.webp`;
 
 function App() {
 
@@ -20,10 +20,11 @@ function App() {
       <main>
         <SiteHeader />
 
-        {/* The full-screen scroll-driven video animation — 77 frames */}
+        {/* The full-screen scroll-driven video animation — 159 frames */}
         <VideoScroll
-          frameCount={77}
+          frameCount={159}
           frameUrlPattern={frameUrl}
+          scrollHeight="700vh"
         />
 
         {/* White wide spacer section after animation */}

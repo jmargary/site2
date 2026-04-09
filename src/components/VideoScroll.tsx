@@ -50,15 +50,15 @@ export function VideoScroll({ frameCount, frameUrlPattern, scrollHeight = '300vh
       ctx.drawImage(firstImg, 0, 0, w, h);
       setVisible(true);
 
-      // Priority: load frames 1-10 immediately
-      for (let i = 1; i <= Math.min(10, frameCount - 1); i++) {
+      // Priority: load frames 1-20 immediately
+      for (let i = 1; i <= Math.min(20, frameCount - 1); i++) {
         const img = new Image();
         img.src = frameUrlPattern(i);
         imagesRef.current[i] = img;
       }
 
       // Background: batch-load remaining frames
-      let cursor = 11;
+      let cursor = 21;
       const batchInterval = setInterval(() => {
         for (let j = 0; j < 5 && cursor < frameCount; j++, cursor++) {
           const img = new Image();
@@ -66,49 +66,21 @@ export function VideoScroll({ frameCount, frameUrlPattern, scrollHeight = '300vh
           imagesRef.current[cursor] = img;
         }
         if (cursor >= frameCount) clearInterval(batchInterval);
-      }, 150);
+      }, 100);
 
-      // Phase playback with constant velocity, purely threshold-triggered
-      const frameObj = { f: 0 };
-      const phases = [0, 12, 38, frameCount - 1];
-      let currentPhase = 0;
-
-      const animateToPhase = (phaseIndex: number) => {
-        const targetFrame = phases[phaseIndex];
-        const framesToPlay = Math.abs(targetFrame - frameObj.f);
-        const duration = framesToPlay * 0.04; 
-        
-        gsap.to(frameObj, {
-          f: targetFrame,
-          duration: Math.max(duration, 0.2), 
-          ease: "power2.inOut",
-          onUpdate: () => drawFrame(frameObj.f, w, h),
-          overwrite: true 
-        });
-      };
-
-      ScrollTrigger.create({
-        trigger: containerRef.current,
-        start: 'top top',
-        end: 'bottom bottom',
-        onUpdate: (self) => {
-          let targetPhase = 0;
-          
-          if (self.progress === 0) {
-            targetPhase = 0;
-          } else if (self.progress <= 0.333) {
-            targetPhase = 1;
-          } else if (self.progress <= 0.666) {
-            targetPhase = 2;
-          } else {
-            targetPhase = 3;
-          }
-          
-          if (currentPhase !== targetPhase) {
-            currentPhase = targetPhase;
-            animateToPhase(targetPhase);
-          }
+      // GSAP: Continuous scrub for "normal scrolling"
+      const obj = { f: 0 };
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: 0.1, // Near-instant follow for "normal" feel
         }
+      }).to(obj, {
+        f: frameCount - 1,
+        ease: 'none',
+        onUpdate: () => drawFrame(obj.f, w, h),
       });
     };
 
