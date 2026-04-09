@@ -14,7 +14,7 @@ export function VideoScroll({ frameCount, frameUrlPattern, scrollHeight = '700vh
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
-  const rawFrameRef = useRef(0); // floating-point target from GSAP
+
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
