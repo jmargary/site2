@@ -19,9 +19,9 @@ export const defaultData: SectionTranslations = {
         '▫️ Exclusive VIP Lounges'
       ],
       slides: [
-        { imageUrl: 'images/default/slide1.jpg', title: 'Signature cuisine: a taste to remember forever' },
-        { imageUrl: 'images/default/slide2.jpg', title: 'Exclusive VIP lounges for your most private moments' },
-        { imageUrl: 'images/default/slide3.jpg', title: 'Architecture where every detail tells a unique story' }
+        { imageUrl: 'images/default/slide1.jpg', title: 'Architecture where every detail tells a unique story' },
+        { imageUrl: 'images/default/slide2.jpg', title: 'Signature cuisine: a taste to remember forever' },
+        { imageUrl: 'images/default/slide3.jpg', title: 'Exclusive VIP lounges for your most private moments' }
       ]
     },
     ru: {
@@ -39,9 +39,9 @@ export const defaultData: SectionTranslations = {
         '▫️ Эксклюзивные VIP-залы'
       ],
       slides: [
-        { imageUrl: 'images/default/slide1.jpg', title: 'Уникальная кухня: вкус, который остается навсегда' },
-        { imageUrl: 'images/default/slide2.jpg', title: 'Эксклюзивные VIP-залы для ваших особенных моментов' },
-        { imageUrl: 'images/default/slide3.jpg', title: 'Архитектура, где каждая деталь рассказывает свою историю' }
+        { imageUrl: 'images/default/slide1.jpg', title: 'Архитектура, где каждая деталь рассказывает свою историю' },
+        { imageUrl: 'images/default/slide2.jpg', title: 'Уникальная кухня: вкус, который остается навсегда' },
+        { imageUrl: 'images/default/slide3.jpg', title: 'Эксклюзивные VIP-залы для ваших особенных моментов' }
       ]
     },
     am: {
@@ -59,9 +59,9 @@ export const defaultData: SectionTranslations = {
         '▫️ Առանձնացված VIP սրահներ'
       ],
       slides: [
-        { imageUrl: 'images/default/slide1.jpg', title: 'Յուրօրինակ խոհանոց՝ հավերժ հիշվող համերով' },
-        { imageUrl: 'images/default/slide2.jpg', title: 'Շքեղ VIP սրահներ՝ Ձեր առանձնահատուկ պահերի համար' },
-        { imageUrl: 'images/default/slide3.jpg', title: 'Ճարտարապետություն, որտեղ ամեն դետալ պատմում է մի պատմություն' }
+        { imageUrl: 'images/default/slide1.jpg', title: 'Ճարտարապետություն, որտեղ ամեն դետալ պատմում է մի պատմություն' },
+        { imageUrl: 'images/default/slide2.jpg', title: 'Յուրօրինակ խոհանոց՝ հավերժ հիշվող համերով' },
+        { imageUrl: 'images/default/slide3.jpg', title: 'Շքեղ VIP սրահներ՝ Ձեր առանձնահատուկ պահերի համար' }
       ]
     }
   }
