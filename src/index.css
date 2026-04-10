@@ -313,16 +313,15 @@ h1 {
   top: 0;
   left: 0;
   width: 100%;
-  height: 64px;
+  height: clamp(70px, 14vw, 110px);
+  padding: 0 clamp(1.5rem, 5vw, 4rem);
   background: rgba(255, 255, 255, 0.1);
-  /* Highly transparent */
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 4rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.03);
   color: var(--info-text);
   /* The JS logic moves this in via transform, but start off-screen to avoid flash */
