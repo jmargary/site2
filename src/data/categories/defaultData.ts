@@ -17,6 +17,11 @@ export const defaultData: SectionTranslations = {
         'Our Facilities:',
         '▫️ Grand Banquet Halls',
         '▫️ Exclusive VIP Lounges'
+      ],
+      slides: [
+        { imageUrl: 'images/default/slide1.jpg', title: 'Architecture where every detail tells a unique story' },
+        { imageUrl: 'images/default/slide2.jpg', title: 'Signature cuisine: a taste to remember forever' },
+        { imageUrl: 'images/default/slide3.jpg', title: 'Exclusive VIP lounges for your most private moments' }
       ]
     },
     ru: {
@@ -32,13 +37,18 @@ export const defaultData: SectionTranslations = {
         'К вашим услугам:',
         '▫️ Величественные банкетные залы',
         '▫️ Эксклюзивные VIP-залы'
+      ],
+      slides: [
+        { imageUrl: 'images/default/slide1.jpg', title: 'Архитектура, где каждая деталь рассказывает свою историю' },
+        { imageUrl: 'images/default/slide2.jpg', title: 'Уникальная кухня: вкус, который остается навсегда' },
+        { imageUrl: 'images/default/slide3.jpg', title: 'Эксклюзивные VIP-залы для ваших особенных моментов' }
       ]
     },
     am: {
       title: 'Բարի գալուստ',
       subtitle: 'Afrikyan’s. Որտեղ ամեն դետալ պատմում է մի պատմություն',
       description: [
-        'Բարի գալուստ Afrikyan’s՝ վայր, որտեղ շքեղությունը, ներդաշնակությունն ու էելեգանտությունը հանդիպում են նորովի։ Մենք ստեղծել ենք միջավայր, որտեղ Ձեր յուրաքանչյուր այցն ու միջոցառումը վերածվում է անմոռանալի հիշողության։',
+        'Բարի գալուստ Afrikyan’s՝ վայր, որտեղ շքեղությունը, ներդաշնակությունն ու էլեգանտությունը հանդիպում են նորովի։ Մենք ստեղծել ենք միջավայր, որտեղ Ձեր յուրաքանչյուր այցն ու միջոցառումը վերածվում է անմոռանալի հիշողության։',
         'Ինչու՞ ընտրել մեզ.',
         'Յուրօրինակ խոհանոց. Բացահայտեք համեր, որոնք հավերժ կմնան Ձեր հիշողության մեջ։',
         'Անթերի միջոցառումներ. Մենք երաշխավորում ենք բարձր տրամադրություն և միայն դրական էմոցիաներ։',
@@ -47,6 +57,11 @@ export const defaultData: SectionTranslations = {
         'Մեր հնարավորությունները.',
         '▫️ Շքեղ հանդիսությունների սրահներ',
         '▫️ Առանձնացված VIP սրահներ'
+      ],
+      slides: [
+        { imageUrl: 'images/default/slide1.jpg', title: 'Ճարտարապետություն, որտեղ ամեն դետալ պատմում է մի պատմություն' },
+        { imageUrl: 'images/default/slide2.jpg', title: 'Յուրօրինակ խոհանոց՝ հավերժ հիշվող համերով' },
+        { imageUrl: 'images/default/slide3.jpg', title: 'Շքեղ VIP սրահներ՝ Ձեր առանձնահատուկ պահերի համար' }
       ]
     }
   }

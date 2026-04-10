@@ -396,7 +396,7 @@ h1 {
    ────────────────────────────────────────────── */
 .carousel-wrapper {
   margin-bottom: 2rem;
-  max-width: 850px;
+  max-width: 450px; /* Small square boxes */
   margin-left: auto;
   margin-right: auto;
   width: 100%;
@@ -404,13 +404,14 @@ h1 {
 
 .carousel-container {
   width: 100%;
-  aspect-ratio: 16 / 9; /* Back to normal standard ratio */
-  max-height: 500px; 
-  border-radius: 20px;
+  aspect-ratio: 1 / 1; /* Square boxes */
+  max-height: 450px; 
+  border-radius: 12px;
   overflow: hidden;
   position: relative;
-  background-color: #0c0d10; /* Deep black frame */
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .carousel-track {
@@ -426,7 +427,7 @@ h1 {
   width: 100%;
   height: 100%;
   flex-shrink: 0;
-  background-size: contain; /* Don't zoom/crop, show full picture */
+  background-size: cover; /* Remove black sides */
   background-repeat: no-repeat;
   background-position: center;
   position: relative;
@@ -518,40 +519,38 @@ h1 {
 /* Secondary Grid for Floors */
 .secondary-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
   margin-top: 3rem;
   max-width: 900px;
 }
 
 .grid-item {
-  background: rgba(255, 255, 255, 0.03);
-  padding: 0.5rem;
+  background: white;
+  padding: 1rem;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
-  gap: 0;
-  transition: all 0.3s ease;
+  gap: 1rem;
+  transition: transform 0.3s ease;
 }
 
 .grid-item:hover {
   transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.08);
-  border-color: #d4af37;
 }
 
 .grid-item img {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  height: auto;
   border-radius: 8px;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .grid-label {
   text-align: center;
   font-weight: 600;
-  color: #fff;
+  color: #333;
   font-size: 1rem;
 }
 
@@ -563,8 +562,8 @@ h1 {
 
 @media (max-width: 768px) {
   .secondary-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 }
 
