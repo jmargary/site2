@@ -617,8 +617,8 @@ function ImageCarousel({ slides, isDefault, layoutType, autoSlide = true }: { sl
       <div
         className="carousel-container"
         style={
-          isSmall ? { height: 'auto', aspectRatio: '9 / 6', maxWidth: '600px' } :
-            isMulti ? { height: 'auto', aspectRatio: '15 / 9', overflow: 'hidden' } :
+          isSmall ? { height: 'auto', aspectRatio: '21 / 9', maxWidth: '600px' } :
+            isMulti ? { height: 'auto', aspectRatio: '21 / 9', overflow: 'hidden' } :
               {}
         }
       >
@@ -638,7 +638,7 @@ function ImageCarousel({ slides, isDefault, layoutType, autoSlide = true }: { sl
               style={{
                 backgroundImage: `url(${slide.imageUrl})`,
                 flex: `0 0 ${100 / slidesToShow}%`,
-                aspectRatio: isMulti ? '6 / 9' : 'unset',
+                aspectRatio: isMulti ? '12 / 9' : 'unset',
                 height: isMulti ? 'auto' : '100%',
                 borderRadius: isMulti ? '12px' : '0',
                 marginRight: isMulti ? '1rem' : '0'
@@ -648,10 +648,8 @@ function ImageCarousel({ slides, isDefault, layoutType, autoSlide = true }: { sl
               {(slide.title || slide.topText || slide.subtitle) && (
                 <div className={`carousel-overlay ${isDefault ? 'carousel-overlay--centered' : ''}`}>
                   <div className="carousel-text-box" style={{ 
-                  backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('./images/business/background.jpg')`,
-                  backgroundSize: 'cover',
-                  backgroundRepeat: 'no-repeat',
-                  backgroundPosition: 'center',
+                  background: 'rgba(0, 0, 0, 0.7)',
+                  backdropFilter: 'blur(10px)',
                   padding: '1.5rem', 
                   width: isMulti ? '90%' : 'auto' 
                 }}>
