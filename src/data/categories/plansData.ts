@@ -2,7 +2,7 @@ import type { SectionTranslations } from '../types';
 
 export const plansData: SectionTranslations = {
   id: 'plans',
-  btnLabel: { en: 'Plans', ru: 'Планы', am: 'Հանդիսությունների և VIP սրահներ' },
+  btnLabel: { en: 'VIP Halls', ru: 'ВИП-залы', am: 'VIP սրահներ' },
   content: {
     en: {
       title: 'Plans & Options',

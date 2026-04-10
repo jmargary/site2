@@ -159,11 +159,12 @@ export function InfoSection() {
               <h2
                 className="info-panel-title"
                 style={{
-                  fontSize: '3.5rem',
-                  marginBottom: '0.5rem',
+                  fontSize: 'clamp(2rem, 8vw, 2.75rem)',
+                  marginBottom: '0.4rem',
                   fontWeight: 800,
                   color: '#fff',
-                  textShadow: '0 4px 12px rgba(0,0,0,0.4)'
+                  textShadow: '0 4px 12px rgba(0,0,0,0.4)',
+                  lineHeight: 1.1
                 }}
               >
                 {languageData.title}
@@ -173,13 +174,14 @@ export function InfoSection() {
                 <p
                   className="info-panel-subtitle"
                   style={{
-                    fontSize: '1.5rem',
-                    fontWeight: 'bold',
+                    fontSize: 'clamp(1rem, 4vw, 1.25rem)',
+                    fontWeight: 600,
                     color: '#fff',
-                    marginBottom: '2.5rem',
+                    marginBottom: '2rem',
                     lineHeight: 1.4,
-                    maxWidth: '900px',
-                    textShadow: '0 2px 8px rgba(0,0,0,0.3)'
+                    maxWidth: '800px',
+                    textShadow: '0 2px 8px rgba(0,0,0,0.3)',
+                    opacity: 0.95
                   }}
                 >
                   {languageData.subtitle}
@@ -529,7 +531,13 @@ export function InfoSection() {
             <div className="business-addon" style={{ marginTop: '3.5rem' }}>
               <h2
                 className="info-panel-title"
-                style={{ fontSize: '2.25rem', marginBottom: '1.5rem', color: '#fff', textShadow: '0 4px 12px rgba(0,0,0,0.4)' }}
+                style={{ 
+                  fontSize: 'clamp(1.5rem, 6vw, 2rem)', 
+                  marginBottom: '1rem', 
+                  color: '#fff', 
+                  textShadow: '0 4px 12px rgba(0,0,0,0.4)',
+                  fontWeight: 800
+                }}
               >
                 {businessLangData.title}
               </h2>
@@ -568,7 +576,7 @@ export function InfoSection() {
             width: '100%',
             paddingBottom: '2rem'
           }}>
-            © 2026 UpAndUp All Rights Reserved.
+            © 2026 Afrikyans All Rights Reserved.
           </footer>
         </div>
       </div>
@@ -652,11 +660,11 @@ function ImageCarousel({ slides, isDefault, layoutType, autoSlide = true }: { sl
                         {slide.topText}
                       </p>
                     )}
-                    <h2 className="info-panel-title" style={{ fontSize: isMulti ? '1.2rem' : '2.2rem', marginBottom: '0.4rem', color: '#fff', fontWeight: 'bold', lineHeight: 1.2 }}>
+                    <h2 className="info-panel-title" style={{ fontSize: isMulti ? '1.1rem' : 'clamp(1.2rem, 5vw, 1.75rem)', marginBottom: '0.3rem', color: '#fff', fontWeight: 800, lineHeight: 1.2 }}>
                       {slide.title}
                     </h2>
                     {slide.subtitle && (
-                      <p className="info-panel-subtitle" style={{ margin: 0, fontSize: isMulti ? '0.8rem' : '1rem', color: '#ddd' }}>
+                      <p className="info-panel-subtitle" style={{ margin: 0, fontSize: isMulti ? '0.75rem' : '0.95rem', color: 'rgba(255,255,255,0.85)', fontWeight: 500 }}>
                         {slide.subtitle}
                       </p>
                     )}
