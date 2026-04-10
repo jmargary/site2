@@ -334,6 +334,19 @@ h1 {
   flex: 1;
 }
 
+.header-logo-img {
+  height: clamp(54px, 12vw, 84px); /* 2x original base 42px = 84px */
+  width: auto;
+  display: block;
+  transition: height 0.3s ease;
+}
+
+@media (max-width: 480px) {
+  .header-logo-img {
+    height: 50px; /* More compact on mobile */
+  }
+}
+
 .header-nav {
   display: flex;
   gap: 2rem;

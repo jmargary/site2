@@ -38,7 +38,7 @@ export function SiteHeader() {
         <img 
           src="images/logo/logo.jpg" 
           alt="Logo" 
-          style={{ height: '42px', display: 'block' }}
+          className="header-logo-img"
           onError={(e) => {
             (e.currentTarget as HTMLImageElement).style.display = 'none';
             if (e.currentTarget.nextElementSibling) {
