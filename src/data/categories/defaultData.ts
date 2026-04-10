@@ -19,17 +19,9 @@ export const defaultData: SectionTranslations = {
         '▫️ Exclusive VIP Lounges'
       ],
       slides: [
-        { imageUrl: 'images/default/image1.jpg', title: 'Main Workspace', subtitle: 'Experience the premium environment' },
-        { imageUrl: 'images/default/image2.jpg', title: 'Meeting Rooms', subtitle: 'Equipped with top tech' },
-        {
-          imageUrl: 'images/default/image3.jpg',
-          title: 'Interesting Facts',
-          stats: [
-            { value: '80+', label: 'rooms' },
-            { value: '7000m²', label: 'total area' },
-            { value: '100+', label: 'outdoor parking spots' }
-          ]
-        }
+        { imageUrl: 'images/default/slide1.jpg', title: 'Signature cuisine: a taste to remember forever' },
+        { imageUrl: 'images/default/slide2.jpg', title: 'Exclusive VIP lounges for your most private moments' },
+        { imageUrl: 'images/default/slide3.jpg', title: 'Architecture where every detail tells a unique story' }
       ]
     },
     ru: {
@@ -47,17 +39,9 @@ export const defaultData: SectionTranslations = {
         '▫️ Эксклюзивные VIP-залы'
       ],
       slides: [
-        { imageUrl: 'images/default/image1.jpg', title: 'Главное Пространство', subtitle: 'Оцените премиальную среду' },
-        { imageUrl: 'images/default/image2.jpg', title: 'Переговорные', subtitle: 'Оснащены передовыми технологиями' },
-        {
-          imageUrl: 'images/default/image3.jpg',
-          title: 'Интересные факты',
-          stats: [
-            { value: '80+', label: 'офисов' },
-            { value: '7000м²', label: 'общая площадь' },
-            { value: '100+', label: 'открытая парковка' }
-          ]
-        }
+        { imageUrl: 'images/default/slide1.jpg', title: 'Уникальная кухня: вкус, который остается навсегда' },
+        { imageUrl: 'images/default/slide2.jpg', title: 'Эксклюзивные VIP-залы для ваших особенных моментов' },
+        { imageUrl: 'images/default/slide3.jpg', title: 'Архитектура, где каждая деталь рассказывает свою историю' }
       ]
     },
     am: {
@@ -75,27 +59,9 @@ export const defaultData: SectionTranslations = {
         '▫️ Առանձնացված VIP սրահներ'
       ],
       slides: [
-        {
-          imageUrl: 'images/default/image1.jpg',
-          topText: 'նոր, պրեմիում A դասի',
-          title: 'բիզնես կենտրոն Երևանում',
-          subtitle: 'որտեղ նորարարությունը հանդիպում է հնարավորություններին'
-        },
-        {
-          imageUrl: 'images/default/image2.jpg',
-          topText: 'UP&UP բիզնես կենտրոնն առաջարկում է',
-          title: '25քմ-335քմ',
-          subtitle: 'գրասենյակային տարածքներ'
-        },
-        {
-          imageUrl: 'images/default/image3.jpg',
-          title: 'Հետաքրքիր փաստեր',
-          stats: [
-            { value: '80+', label: 'սենյակ․' },
-            { value: '7000մ²', label: 'ընդհանուր տարածք․' },
-            { value: '100+', label: 'մեքենաների բացօթյա կայանատեղի' }
-          ]
-        }
+        { imageUrl: 'images/default/slide1.jpg', title: 'Յուրօրինակ խոհանոց՝ հավերժ հիշվող համերով' },
+        { imageUrl: 'images/default/slide2.jpg', title: 'Շքեղ VIP սրահներ՝ Ձեր առանձնահատուկ պահերի համար' },
+        { imageUrl: 'images/default/slide3.jpg', title: 'Ճարտարապետություն, որտեղ ամեն դետալ պատմում է մի պատմություն' }
       ]
     }
   }
