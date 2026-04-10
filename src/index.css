@@ -313,8 +313,9 @@ h1 {
   top: 0;
   left: 0;
   width: 100%;
-  height: clamp(70px, 14vw, 110px);
-  padding: 0 clamp(1.5rem, 5vw, 4rem);
+  height: auto;
+  min-height: 80px;
+  padding: 0.75rem clamp(1.5rem, 5vw, 4rem);
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -325,24 +326,24 @@ h1 {
   border-bottom: 1px solid rgba(0, 0, 0, 0.03);
   color: var(--info-text);
   /* The JS logic moves this in via transform, but start off-screen to avoid flash */
-  transform: translateY(-100%);
+  transform: translateY(-110%);
   opacity: 0;
 }
 
 .header-logo {
-  flex: 1;
+  flex: 0 0 auto;
 }
 
 .header-logo-img {
-  height: clamp(54px, 12vw, 84px); /* 2x original base 42px = 84px */
+  height: clamp(54px, 9vw, 100px); 
   width: auto;
   display: block;
-  transition: height 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 @media (max-width: 480px) {
   .header-logo-img {
-    height: 50px; /* More compact on mobile */
+    height: 48px;
   }
 }
 
