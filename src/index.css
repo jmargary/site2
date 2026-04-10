@@ -396,7 +396,7 @@ h1 {
    ────────────────────────────────────────────── */
 .carousel-wrapper {
   margin-bottom: 2rem;
-  max-width: 450px; /* Small square boxes */
+  max-width: 480px; /* Slightly wider and taller */
   margin-left: auto;
   margin-right: auto;
   width: 100%;
@@ -404,14 +404,14 @@ h1 {
 
 .carousel-container {
   width: 100%;
-  aspect-ratio: 1 / 1; /* Square boxes */
-  max-height: 450px; 
+  aspect-ratio: 4 / 5; /* Slightly taller vertical boxes */
+  max-height: 580px; 
   border-radius: 12px;
   overflow: hidden;
   position: relative;
   background-color: transparent;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
 .carousel-track {

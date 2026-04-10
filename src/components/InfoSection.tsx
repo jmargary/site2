@@ -617,8 +617,8 @@ function ImageCarousel({ slides, isDefault, layoutType, autoSlide = true }: { sl
       <div
         className="carousel-container"
         style={
-          isSmall ? { height: 'auto', aspectRatio: '1 / 1', maxWidth: '400px' } :
-            isMulti ? { height: 'auto', aspectRatio: '1 / 1', overflow: 'hidden' } :
+          isSmall ? { height: 'auto', aspectRatio: '4 / 5', maxWidth: '400px' } :
+            isMulti ? { height: 'auto', aspectRatio: '4 / 5', overflow: 'hidden' } :
               {}
         }
       >
@@ -646,12 +646,12 @@ function ImageCarousel({ slides, isDefault, layoutType, autoSlide = true }: { sl
             >
               {/* Text overlapping THIS specific image box inside the slide component */}
               {(slide.title || slide.topText || slide.subtitle) && (
-                <div className={`carousel-overlay ${isDefault ? 'carousel-overlay--centered' : ''}`}>
+                <div className="carousel-overlay">
                   <div className="carousel-text-box" style={{ 
                   background: 'rgba(0, 0, 0, 0.7)',
                   backdropFilter: 'blur(10px)',
-                  padding: '1.5rem', 
-                  width: isMulti ? '90%' : 'auto' 
+                  padding: '1.25rem', 
+                  width: '100%' 
                 }}>
                     {slide.topText && (
                       <p style={{ margin: 0, fontSize: isMulti ? '0.7rem' : '0.9rem', color: '#ccc', letterSpacing: '1px', marginBottom: '0.5rem', fontWeight: 600 }}>
