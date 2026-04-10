@@ -617,8 +617,8 @@ function ImageCarousel({ slides, isDefault, layoutType, autoSlide = true }: { sl
       <div
         className="carousel-container"
         style={
-          isSmall ? { height: 'auto', aspectRatio: '25 / 9', maxWidth: '600px' } :
-            isMulti ? { height: 'auto', aspectRatio: '25 / 9', overflow: 'hidden' } :
+          isSmall ? { height: 'auto', aspectRatio: '16 / 9', maxWidth: '600px' } :
+            isMulti ? { height: 'auto', aspectRatio: '16 / 9', overflow: 'hidden' } :
               {}
         }
       >
