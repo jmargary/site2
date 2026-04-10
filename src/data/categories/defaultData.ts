@@ -5,11 +5,18 @@ export const defaultData: SectionTranslations = {
   btnLabel: { en: '', ru: '', am: '' },
   content: {
     en: {
-      title: 'Welcome to the Future Workspace',
-      subtitle: 'Experience premium quality',
+      title: 'Welcome to Afrikyan’s',
+      subtitle: 'Afrikyan’s: Where Every Detail Tells a Story',
       description: [
-        'Discover an environment built for performance. Our facilities integrate striking design with unmatched functionality.',
-        'Whether you are an individual professional or a growing team, we have the perfect space for you.'
+        'Welcome to Afrikyan’s, a place where luxury, harmony, and elegance are redefined. Step into a world where architecture inspires and every moment is crafted to perfection. Whether it’s a private dinner or a grand celebration, we ensure an experience that lingers in your memory forever.',
+        'Why Afrikyan’s?',
+        'Signature Cuisine: Discover unique flavors that leave a lasting impression.',
+        'Memorable Events: Celebrate your milestones in a vibrant, positive, and stylish atmosphere.',
+        'Premium Service: Enjoy world-class hospitality in a sophisticated and modern setting.',
+        'Timeless Design: A perfect blend of charm and elegance where every corner is a masterpiece.',
+        'Our Facilities:',
+        '▫️ Grand Banquet Halls',
+        '▫️ Exclusive VIP Lounges'
       ],
       slides: [
         { imageUrl: 'images/default/image1.jpg', title: 'Main Workspace', subtitle: 'Experience the premium environment' },
@@ -26,11 +33,18 @@ export const defaultData: SectionTranslations = {
       ]
     },
     ru: {
-      title: 'Добро пожаловать в рабочее пространство будущего',
-      subtitle: 'Оцените премиальное качество',
+      title: 'Добро пожаловать в Afrikyan’s',
+      subtitle: 'Afrikyan’s: Искусство вкуса и эстетика архитектуры',
       description: [
-        'Откройте для себя среду, созданную для высокой производительности. Наши объекты сочетают поразительный дизайн с непревзойденной функциональностью.',
-        'Являетесь ли вы индивидуальным профессионалом или растущей командой, у нас есть идеальное пространство для вас.'
+        'Добро пожаловать в Afrikyan’s — обновленный ресторан, где изысканность и гармония ощущаются в каждой детали. Если вы ищете идеальное место для важного события или гастрономического удовольствия, мы создадим для вас атмосферу, превосходящую ожидания.',
+        'Наши преимущества:',
+        'Уникальная кухня: Блюда, вкус которых вы будете вспоминать с восторгом.',
+        'Незабываемые события: Ваше торжество пройдет в атмосфере радости и элегантности.',
+        'Высококлассный сервис: Безупречное обслуживание в стильном и современном интерьере.',
+        'Вдохновляющий дизайн: Архитектура, в которой каждая деталь рассказывает свою историю.',
+        'К вашим услугам:',
+        '▫️ Величественные банкетные залы',
+        '▫️ Эксклюзивные VIP-залы'
       ],
       slides: [
         { imageUrl: 'images/default/image1.jpg', title: 'Главное Пространство', subtitle: 'Оцените премиальную среду' },
@@ -48,10 +62,17 @@ export const defaultData: SectionTranslations = {
     },
     am: {
       title: 'Բարի գալուստ',
-      subtitle: 'UP&UP բիզնես կենտրոնը կառուցվել և հանձնվել է շահագործման 2024 թվականին։',
+      subtitle: 'Afrikyan’s. Որտեղ ամեն դետալ պատմում է մի պատմություն',
       description: [
-        'Բիզնես կենտրոնն ռաջարկում է 15-ից 332քմ լուսավոր և հարմարավետ գրասենյակային տարածքներ։ Գտնվում է Աջափնյակ վարչական շրջանում՝ Երևանի կենտրոնից ընդամենը 7կմ հեռավորության վրա՝ հյուսիս-հարավ մայրուղու առաջին գիծ։ Նոր, պրեմիում դասի բիզնես կենտրոն՝ հագեցած նորագույն տեխնոլոգիաներով և ժամանակակից դիզայնով։',
-        'Այն առաջին բիզնես կենտրոնն է Երևանում կառուցված բացառապես ՏՏ ոլորտի ընկերությունների համար։ Համալրված է ժամանակակից կոմունիկացիոն ցանցով, երկու ռեզերվային գծով և 24/7 անվտանգության համակարգով, որը ներառում է տեսահսկում, հակահրդեհային, ձայնազդանշանային համակարգ, մուտքի հսկողության (face և finger control) և պահնորդական ծառայություն։ Առկա են ստորգետնյա և բացօթյա կայանատեղիներ, էլեկտրոմոբիլների արագ լիցքավորման կայաններ և ավտոլվացման կետ։'
+        'Բարի գալուստ Afrikyan’s՝ վայր, որտեղ շքեղությունը, ներդաշնակությունն ու էլեգանտությունը հանդիպում են նորովի։ Մենք ստեղծել ենք միջավայր, որտեղ Ձեր յուրաքանչյուր այցն ու միջոցառումը վերածվում է անմոռանալի հիշողության։',
+        'Ինչու՞ ընտրել մեզ.',
+        'Յուրօրինակ խոհանոց. Բացահայտեք համեր, որոնք հավերժ կմնան Ձեր հիշողության մեջ։',
+        'Անթերի միջոցառումներ. Մենք երաշխավորում ենք բարձր տրամադրություն և միայն դրական էմոցիաներ։',
+        'Բարի գալուստ. Նրբագեղ և նորաոճ միջավայր՝ համեմված պրոֆեսիոնալ մոտեցմամբ։',
+        'Ճարտարապետական ներշնչանք. Մեր դիզայնի յուրաքանչյուր անկյունը ոգեշնչման աղբյուր է։',
+        'Մեր հնարավորությունները.',
+        '▫️ Շքեղ հանդիսությունների սրահներ',
+        '▫️ Առանձնացված VIP սրահներ'
       ],
       slides: [
         {
