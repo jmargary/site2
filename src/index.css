@@ -400,9 +400,9 @@ h1 {
 
 .carousel-container {
   width: 100%;
-  aspect-ratio: 21 / 9; /* Wider, cinematic ratio to keep height smaller */
-  max-height: 380px; 
-  border-radius: 20px;
+  aspect-ratio: 25 / 9; /* Ultra-wide cinematic ratio */
+  max-height: 320px; 
+  border-radius: 16px;
   overflow: hidden;
   position: relative;
   background-color: #000;
@@ -436,7 +436,7 @@ h1 {
   height: 100%;
   display: flex;
   align-items: flex-end;
-  padding: 2.5rem;
+  padding: 1.5rem;
   pointer-events: none;
 }
 
