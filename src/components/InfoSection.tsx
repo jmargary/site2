@@ -150,7 +150,7 @@ export function InfoSection() {
           style={{ gridArea: '1 / 1', zIndex: 1 }}
         >
           {/* Main Category Title & Subtitle */}
-          {(languageData.layoutType !== 'plansGrid' && languageData.layoutType !== 'alternatingList' && languageData.layoutType !== 'featureGrid') && (
+          {(languageData.layoutType !== 'plansGrid' && languageData.layoutType !== 'alternatingList' && languageData.layoutType !== 'featureGrid' && languageData.layoutType !== 'menuList') && (
             <>
               <h2
                 className="info-panel-title"
@@ -430,14 +430,62 @@ export function InfoSection() {
             </div>
           )}
 
-          {/* Main Category Description */}
-          {(languageData.layoutType !== 'plansGrid' && languageData.layoutType !== 'alternatingList' && languageData.layoutType !== 'featureGrid') && (
+          {(languageData.layoutType !== 'plansGrid' && languageData.layoutType !== 'alternatingList' && languageData.layoutType !== 'featureGrid' && languageData.layoutType !== 'menuList') && (
             <div className={`info-panel-desc ${(activeId === 'default' || activeId === null || activeId === 'menu') ? 'description-ornamented' : ''}`}>
               {languageData.description && languageData.description.map((p, idx) => (
                 <p key={idx} style={{ marginBottom: '1.25rem', fontSize: '1.15rem', lineHeight: 1.7, color: 'rgba(255, 255, 255, 0.85)', fontWeight: 500, maxWidth: '800px' }}>
                   {p}
                 </p>
               ))}
+            </div>
+          )}
+
+          {/* Menu List Layout (New) */}
+          {languageData.layoutType === 'menuList' && (
+            <div className="description-ornamented" style={{ width: '100%', maxWidth: '800px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                {languageData.menuItems?.map((item, idx) => (
+                  <div key={idx}>
+                    <h3 style={{ 
+                      color: '#c5a059', 
+                      fontSize: '1.4rem', 
+                      fontWeight: 700, 
+                      textTransform: 'uppercase', 
+                      letterSpacing: '1px',
+                      marginBottom: item.subItems ? '0.8rem' : '0'
+                    }}>
+                      {item.title}
+                    </h3>
+                    
+                    {item.subItems && (
+                      <div style={{ 
+                        display: 'flex', 
+                        flexWrap: 'wrap', 
+                        gap: '0.5rem 1.2rem',
+                        marginTop: '0.4rem'
+                      }}>
+                        {item.subItems.map((sub, sIdx) => (
+                          <span key={sIdx} style={{ 
+                            color: 'rgba(255,255,255,0.7)', 
+                            fontSize: '0.9rem',
+                            fontWeight: 500
+                          }}>
+                            {sub}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+
+                    {idx < (languageData.menuItems?.length || 0) - 1 && (
+                      <div style={{ 
+                        height: '1px', 
+                        background: 'linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.3), transparent)', 
+                        marginTop: '1.5rem' 
+                      }} />
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           )}
 

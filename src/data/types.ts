@@ -23,8 +23,8 @@ export type LanguageData = {
   alternatingList?: { title: string; text: string; imageUrl: string }[];
   featureGrid?: { title: string; text: string; imageUrl: string }[];
   panelBackground?: string;
-  secondaryGrid?: string[];
-  layoutType?: 'standard' | 'smallCarousel' | 'multiSlide' | 'plansGrid' | 'alternatingList' | 'featureGrid' | 'contactForm';
+  menuItems?: { title: string; subItems?: string[] }[];
+  layoutType?: 'standard' | 'smallCarousel' | 'multiSlide' | 'plansGrid' | 'alternatingList' | 'featureGrid' | 'contactForm' | 'menuList';
 };
 
 export type SectionTranslations = {
