@@ -11,28 +11,28 @@ export const vipData: SectionTranslations = {
       layoutType: 'plansGrid',
       plansData: [
         { 
-          title: 'Royal Suite', 
-          shortText: 'The ultimate luxury experience.', 
-          fullText: 'Our royal suites provide a professional, quiet environment suitable for high-end gatherings. Fully equipped with premium seating and fine dining service.',
-          imageUrl: 'images/vip/pic1.jpg' 
+          title: 'VIP1', 
+          shortText: 'նախատեսված մինչև 12 անձի համար', 
+          fullText: '',
+          imageUrl: 'images/vip/vip1.jpg' 
         },
         { 
-          title: 'Prime Hall', 
-          shortText: 'Perfect for business and pleasure.', 
-          fullText: 'A dedicated VIP space that offers the benefit of privacy with professional service. Ideal for small to medium-sized groups.',
-          imageUrl: 'images/vip/pic2.jpg' 
+          title: 'VIP2', 
+          shortText: 'նախատեսված մինչև 14 անձի համար', 
+          fullText: '',
+          imageUrl: 'images/vip/vip2.jpg' 
         },
         { 
-          title: 'Elite Club', 
-          shortText: 'Exclusive membership feel.', 
-          fullText: 'A sophisticated atmosphere for members and special guests. Includes full bar service and private administrative support.',
-          imageUrl: 'images/vip/pic3.jpg' 
+          title: 'VIP3', 
+          shortText: 'նախատեսված մինչև 22 անձի համար', 
+          fullText: '',
+          imageUrl: 'images/vip/vip3.jpg' 
         },
         { 
-          title: 'Tech Lounge', 
-          shortText: 'Modern tech for your meetings.', 
-          fullText: 'State-of-the-art lounge equipped with top-tier presentation technology and seamless connectivity.',
-          imageUrl: 'images/vip/pic4.jpg' 
+          title: 'VIP4', 
+          shortText: 'նախատեսված մինչև 12 անձի համար', 
+          fullText: '',
+          imageUrl: 'images/vip/vip4.jpg' 
         }
       ]
     },
@@ -43,28 +43,28 @@ export const vipData: SectionTranslations = {
       layoutType: 'plansGrid',
       plansData: [
         { 
-          title: 'Королевский Сюит', 
-          shortText: 'Высший уровень роскоши.', 
-          fullText: 'Наши королевские сюиты обеспечивают профессиональную обстановку для высококлассных встреч.',
-          imageUrl: 'images/vip/pic1.jpg' 
+          title: 'VIP1', 
+          shortText: 'նախատեսված մինչև 12 անձի համար', 
+          fullText: '',
+          imageUrl: 'images/vip/vip1.jpg' 
         },
         { 
-          title: 'Прайм Зал', 
-          shortText: 'Идеально для бизнеса и отдыха.', 
-          fullText: 'Специальное ВИП-пространство, предлагающее приватность и профессиональный сервис.',
-          imageUrl: 'images/vip/pic2.jpg' 
+          title: 'VIP2', 
+          shortText: 'նախատեսված մինչև 14 անձի համար', 
+          fullText: '',
+          imageUrl: 'images/vip/vip2.jpg' 
         },
         { 
-          title: 'Элитный Клуб', 
-          shortText: 'Эксклюзивная атмосфера клуба.', 
-          fullText: 'Утонченная атмосфера для членов клуба и особых гостей. Включает обслуживание в баре.',
-          imageUrl: 'images/vip/pic3.jpg' 
+          title: 'VIP3', 
+          shortText: 'նախատեսված մինչև 22 անձի համար', 
+          fullText: '',
+          imageUrl: 'images/vip/vip3.jpg' 
         },
         { 
-          title: 'Техно Лаундж', 
-          shortText: 'Современные технологии для встреч.', 
-          fullText: 'Зал, оснащенный первоклассным презентационным оборудованием.',
-          imageUrl: 'images/vip/pic4.jpg' 
+          title: 'VIP4', 
+          shortText: 'նախատեսված մինչև 12 անձի համար', 
+          fullText: '',
+          imageUrl: 'images/vip/vip4.jpg' 
         }
       ]
     },
@@ -75,113 +75,28 @@ export const vipData: SectionTranslations = {
       layoutType: 'plansGrid',
       plansData: [
         { 
-          title: 'STANDARD', 
-          shortText: 'Սկսած 25քմ-ից, 1 քմ՝ 10 000դրամ (ներառյալ ԱԱՀ)', 
-          fullText: 'Ստանդարտ փաթեթը ներառում է հետևյալ ծառայությունները՝',
-          bulletPoints: [
-            'Առանձին կառավարվող ջեռուցման, օդորակման և օդափոխության համակարգ',
-            'Գերարագ և անխափան ինտերնետ կապ, երկու ռեզերվային գիծ` մինչև 100 մբ/վ արագության հնարավորությամբ',
-            'Ընդունարան ամբողջ կենտրոնը սպասարկելու համար',
-            'Բացօթյա կայանատեղի (մեկ մեքենայի համար)',
-            'Հոսանքի ռեզերվային գծեր և գերհզոր ինքնաշխատ գեներատոր ամբողջ շենքը էլեկտրականությամբ ապահովելու համար',
-            '24/7 անվտանգության ապահովում',
-            'Տեսահսկում',
-            'Հակահրդեհային համակարգ',
-            'Ձայնազդանշանային համակարգ',
-            'Պահնորդական ծառայություն',
-            'Զանգերի սենյակներ (calling rooms)',
-            'Սուրճի սենյակ ամեն հարկում',
-            'Ամբողջ տարածքի մաքրության ապահովում',
-            'Ընդարձակ կանաչ գոտի հանգստի համար (Green zone)'
-          ],
-          imageUrl: 'images/vip/pic1.jpg' 
+          title: 'VIP1', 
+          shortText: 'նախատեսված մինչև 12 անձի համար', 
+          fullText: '',
+          imageUrl: 'images/vip/vip1.jpg' 
         },
         { 
-          title: 'STANDARD +', 
-          shortText: '1քմ արժեքը` 12 000 դր (ներառյալ ԱԱՀ)', 
-          fullText: 'Ստանդարտ + փաթեթը ներառում է հետևյալ լրացուցիչ ծառայությունները՝',
-          bulletPoints: [
-            'Առանձին կառավարվող ջեռուցման, օդորակման և օդափոխության համակարգ',
-            'Գերարագ և անխափան ինտերնետ կապ, երկու ռեզերվային գիծ՝ մինչև 100 մբ/վ արագության հնարավորությամբ',
-            'Ընդունարան ամբողջ կենտրոնը սպասարկելու համար',
-            'Բացօթյա կայանատեղի (մեկ մեքենայի համար)',
-            'Հոսանքի ռեզերվային գծեր և գերհզոր ինքնաշխատ գեներատոր ամբողջ շենքը էլեկտրականությամբ ապահովելու համար',
-            '24/7 անվտանգության ապահովում',
-            'Տեսահսկում',
-            'Հակահրդեհային համակարգ',
-            'Ձայնազդանշանային համակարգ',
-            'Պահնորդական ծառայություն',
-            'Զանգերի սենյակներ (calling rooms)',
-            'Սմարթ հեռախոսացանցի տրամադրում',
-            'Սուրճի սենյակ ամեն հարկում',
-            'Smart TV ծառայություն',
-            'Ամբողջ տարածքի մաքրության ապահովում',
-            'Ընդարձակ կանաչ գոտի հանգստի համար (Green zone)',
-            'Տեսազանգերի սենյակներ (meeting rooms)',
-            'Ընդարձակ հանդիպումների սրահ (Conference hall) (ամսական 4ժ)',
-            'Սերվերային տարածքի տրամադրում (unit)'
-          ],
-          imageUrl: 'images/vip/pic2.jpg' 
+          title: 'VIP2', 
+          shortText: 'նախատեսված մինչև 14 անձի համար', 
+          fullText: '',
+          imageUrl: 'images/vip/vip2.jpg' 
         },
         { 
-          title: 'PREMIUM', 
-          shortText: '1քմ արժեքը` 13 000 դր (ներառյալ ԱԱՀ)', 
-          fullText: 'Պրեմիում փաթեթը ներառում է հետևյալ լրացուցիչ ծառայությունները՝',
-          bulletPoints: [
-            'Առանձին կառավարվող ջեռուցման, օդորակման և օդափոխության համակարգ',
-            'Գերարագ և անխափան ինտերնետ կապ, երկու ռեզերվային գիծ` մինչև 100 մբ/վ արագության հնարավորությամբ',
-            'Ընդունարան ամբողջ կենտրոնը սպասարկելու համար',
-            'Բացօթյա կայանատեղի (մեկ մեքենայի համար)',
-            'Հոսանքի ռեզերվային գծեր և գերհզոր ինքնաշխատ գեներատոր ամբողջ շենքը էլեկտրականությամբ ապահովելու համար',
-            '24/7 անվտանգության ապահովում',
-            'Տեսահսկում',
-            'Հակահրդեհային համակարգ',
-            'Ձայնազդանշանային համակարգ',
-            'Պահնորդական ծառայություն',
-            'Զանգերի սենյակներ (calling rooms)',
-            'Սմարթ հեռախոսացանցի տրամադրում',
-            'Սմարթ պահարաններ (lockers)',
-            'Սուրճի սենյակ ամեն հարկում',
-            'Smart TV ծառայություն',
-            'Ամբողջ տարածքի մաքրության ապահվում',
-            'Ընդարձակ կանաչ գոտի հանգստի համար (Green zone)',
-            'Տեսազանգերի սենյակներ (meeting rooms)',
-            'Ընդարձակ հանդիպումների սրահ (Conference hall) (ամսական 4ժ)',
-            'Սերվերային տարածքի տրամադրում (unit)'
-          ],
-          imageUrl: 'images/vip/pic3.jpg' 
+          title: 'VIP3', 
+          shortText: 'նախատեսված մինչև 22 անձի համար', 
+          fullText: '',
+          imageUrl: 'images/vip/vip3.jpg' 
         },
         { 
-          title: 'PREMIUM +', 
-          shortText: '1քմ արժեքը 16.000 դր (ներառյալ ԱԱՀ)', 
-          fullText: 'Պրեմիում + փաթեթը ներառում է հետևյալ բացառիկ ծառայությունները՝',
-          bulletPoints: [
-            'Առանձին կառավարվող ջեռուցման, օդորակման և օդափոխության համակարգ',
-            'Գերարագ և անխափան ինտերնետ կապ, երկու ռեզերվային գիծ` մինչև 100 մբ/վ արագությամբ',
-            'Ընդունարան ամբողջ կենտրոնը սպասարկելու համար',
-            'Բացօթյա կայանատեղի',
-            'Հոսանքի ռեզերվային գծեր և գերհզոր ինքնաշխատ գեներատոր ամբողջ շենքը էլեկտրականությամբ ապահովելու համար',
-            '24/7 անվտանգության ապահովում',
-            'Տեսահսկում',
-            'Հակահրդեհային համակարգ',
-            'Ձայնազդանշանային համակարգ',
-            'Պահնորդական ծառայություն',
-            'Զանգերի սենյակներ (calling rooms)',
-            'Սմարթ հեռախոսացանցի տրամադրում',
-            'Սուրճի սենյակ ամեն հարկում',
-            'Ստորգետնյա կայանատեղի',
-            'Մուտքի հսկողություն (face և finger control)',
-            'Սմարթ պահարաններ (lockers)',
-            'Smart TV ծառայություն',
-            'Ամբողջ տարածքի մաքրության ապահվում',
-            'Ամպային տիրույթի տրամադրում (cloud)',
-            'Ընդարձակ կանաչ գոտի հանգստի համար (Green zone)',
-            'Ընդարձակ հանդիպումների սրահ (Conference hall)',
-            'Տեսազանգերի սենյակներ (meeting rooms)',
-            'Սերվերային տարածքի տրամադրում (unit)',
-            'Տանիքում բացօթյա ռեստորան-սրճարան, սիգար-բար, ֆուդ կորտ'
-          ],
-          imageUrl: 'images/vip/pic4.jpg' 
+          title: 'VIP4', 
+          shortText: 'նախատեսված մինչև 12 անձի համար', 
+          fullText: '',
+          imageUrl: 'images/vip/vip4.jpg' 
         }
       ]
     }

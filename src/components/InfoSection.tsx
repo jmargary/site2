@@ -356,27 +356,29 @@ export function InfoSection() {
                     }}
                   >
                     <h3 style={{ color: 'rgba(255,255,255,0.7)', fontSize: '1.1rem', marginBottom: '0.6rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px' }}>{plan.title}</h3>
-                    <p style={{ color: '#fff', fontSize: '1.2rem', marginBottom: '1.5rem', lineHeight: 1.3, fontWeight: 800 }}>{plan.shortText}</p>
-                    <button
-                      onClick={() => setExpandedPlanIndex(expandedPlanIndex === idx ? null : idx)}
-                      style={{
-                        alignSelf: 'flex-start',
-                        padding: '0.7rem 1.4rem',
-                        borderRadius: '25px',
-                        background: expandedPlanIndex === idx ? '#fff' : 'rgba(255,255,255,0.1)',
-                        color: expandedPlanIndex === idx ? '#000' : '#fff',
-                        backdropFilter: 'blur(12px)',
-                        border: `1px solid ${expandedPlanIndex === idx ? '#fff' : 'rgba(255,255,255,0.4)'}`,
-                        fontSize: '0.85rem',
-                        fontWeight: 700,
-                        letterSpacing: '0.5px',
-                        cursor: 'pointer',
-                        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                        boxShadow: expandedPlanIndex === idx ? '0 10px 20px rgba(0,0,0,0.3)' : 'none'
-                      }}
-                    >
-                      {lang === 'am' ? 'Ավելին' : lang === 'ru' ? 'Подробнее' : 'More'}
-                    </button>
+                    <p style={{ color: '#fff', fontSize: '1.2rem', marginBottom: (plan.fullText || plan.bulletPoints) ? '1.5rem' : '0.5rem', lineHeight: 1.3, fontWeight: 800 }}>{plan.shortText}</p>
+                    {(plan.fullText || plan.bulletPoints) && (
+                      <button
+                        onClick={() => setExpandedPlanIndex(expandedPlanIndex === idx ? null : idx)}
+                        style={{
+                          alignSelf: 'flex-start',
+                          padding: '0.7rem 1.4rem',
+                          borderRadius: '25px',
+                          background: expandedPlanIndex === idx ? '#fff' : 'rgba(255,255,255,0.1)',
+                          color: expandedPlanIndex === idx ? '#000' : '#fff',
+                          backdropFilter: 'blur(12px)',
+                          border: `1px solid ${expandedPlanIndex === idx ? '#fff' : 'rgba(255,255,255,0.4)'}`,
+                          fontSize: '0.85rem',
+                          fontWeight: 700,
+                          letterSpacing: '0.5px',
+                          cursor: 'pointer',
+                          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                          boxShadow: expandedPlanIndex === idx ? '0 10px 20px rgba(0,0,0,0.3)' : 'none'
+                        }}
+                      >
+                        {lang === 'am' ? 'Ավելին' : lang === 'ru' ? 'Подробнее' : 'More'}
+                      </button>
+                    )}
                   </div>
                 ))}
               </div>
