@@ -432,8 +432,8 @@ export function InfoSection() {
 
           {/* Main Category Description */}
           {(languageData.layoutType !== 'plansGrid' && languageData.layoutType !== 'alternatingList' && languageData.layoutType !== 'featureGrid') && (
-            <div className={`info-panel-desc ${(activeId === 'default' || activeId === null) ? 'description-ornamented' : ''}`}>
-              {languageData.description.map((p, idx) => (
+            <div className={`info-panel-desc ${(activeId === 'default' || activeId === null || activeId === 'menu') ? 'description-ornamented' : ''}`}>
+              {languageData.description && languageData.description.map((p, idx) => (
                 <p key={idx} style={{ marginBottom: '1.25rem', fontSize: '1.15rem', lineHeight: 1.7, color: 'rgba(255, 255, 255, 0.85)', fontWeight: 500, maxWidth: '800px' }}>
                   {p}
                 </p>
@@ -608,13 +608,13 @@ function ImageCarousel({ slides, isDefault, layoutType, autoSlide = true }: { sl
               {(slide.title || slide.topText || slide.subtitle) && (
                 <div className="carousel-overlay">
                   <div className="carousel-text-box" style={{ 
-                    background: '#0f1115', // Main background color
+                    background: (activeId === 'default' || activeId === null) ? 'rgba(0, 0, 0, 0.6)' : '#0f1115', // Lighter for default
                     backdropFilter: 'blur(8px)',
                     padding: '0.8rem 1.4rem', 
                     width: isMulti ? '90%' : 'auto',
                     borderRadius: '8px',
-                    border: '1px solid #c5a059', // Gold border
-                    boxShadow: '0 4px 15px rgba(0,0,0,0.5)'
+                    border: (activeId === 'default' || activeId === null) ? 'none' : '1px solid #c5a059', // Border only for others
+                    boxShadow: (activeId === 'default' || activeId === null) ? 'none' : '0 4px 15px rgba(0,0,0,0.5)'
                 }}>
                     {slide.topText && (
                       <p style={{ margin: 0, fontSize: isMulti ? '0.6rem' : '0.75rem', color: '#ccc', letterSpacing: '1px', marginBottom: '0.2rem', fontWeight: 600 }}>
