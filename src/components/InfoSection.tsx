@@ -73,10 +73,6 @@ export function InfoSection() {
   const currentSection = INFO_CONTENT[activeId ?? 'default'] ?? INFO_CONTENT['default'];
   const languageData = currentSection.content[lang];
 
-  // New: If in default (or initial) state, we'll also append the business info below it
-  const showBusinessAddon = activeId === 'default' || activeId === null;
-  const businessLangData = INFO_CONTENT['business'].content[lang];
-
   const [expandedPlanIndex, setExpandedPlanIndex] = useState<number | null>(null);
 
   // Auto-scroll when a plan is expanded
@@ -526,45 +522,6 @@ export function InfoSection() {
             </div>
           )}
 
-          {/* BUSINESS ADDON: If we are in default, we append business content here */}
-          {showBusinessAddon && (
-            <div className="business-addon" style={{ marginTop: '3.5rem' }}>
-              <h2
-                className="info-panel-title"
-                style={{ 
-                  fontSize: 'clamp(1.5rem, 6vw, 2rem)', 
-                  marginBottom: '1rem', 
-                  color: '#fff', 
-                  textShadow: '0 4px 12px rgba(0,0,0,0.4)',
-                  fontWeight: 800
-                }}
-              >
-                {businessLangData.title}
-              </h2>
-
-              <ImageCarousel
-                slides={businessLangData.slides ?? []}
-                isDefault={false}
-                layoutType="multiSlide"
-                autoSlide={false}
-              />
-
-              {businessLangData.secondaryGrid && (
-                <div className="secondary-grid" style={{ marginTop: '3rem' }}>
-                  {businessLangData.secondaryGrid.map((img, idx) => (
-                    <div
-                      key={idx}
-                      className="grid-item"
-                      onClick={() => setSelectedImage(img)}
-                      style={{ cursor: 'zoom-in' }}
-                    >
-                      <img src={img} alt={`Floor ${idx + 1}`} loading="lazy" decoding="async" />
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          )}
           {/* Global Footer Copyright */}
           <footer style={{ 
             marginTop: '4rem', 

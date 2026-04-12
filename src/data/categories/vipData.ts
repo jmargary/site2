@@ -1,77 +1,77 @@
 import type { SectionTranslations } from '../types';
 
-export const plansData: SectionTranslations = {
-  id: 'plans',
+export const vipData: SectionTranslations = {
+  id: 'vip',
   btnLabel: { en: 'VIP Halls', ru: 'ВИП-залы', am: 'VIP սրահներ' },
   content: {
     en: {
-      title: 'Plans & Options',
-      subtitle: 'Flexible setups for every need',
-      description: ['Choose from a range of tailored plans — from individual desks to full-floor suites.'],
+      title: 'VIP Options',
+      subtitle: 'Exclusive spaces for your events',
+      description: ['Choose from our premium VIP halls designed for luxury and privacy.'],
       layoutType: 'plansGrid',
       plansData: [
         { 
-          title: 'Private Office', 
-          shortText: 'Your dedicated secure space.', 
-          fullText: 'Our private offices provide a professional, quiet environment suitable for small to medium-sized teams. Each office is fully furnished and includes high-speed internet, secure access, and all utilities.',
-          imageUrl: 'images/plans/pic1.jpg' 
+          title: 'Royal Suite', 
+          shortText: 'The ultimate luxury experience.', 
+          fullText: 'Our royal suites provide a professional, quiet environment suitable for high-end gatherings. Fully equipped with premium seating and fine dining service.',
+          imageUrl: 'images/vip/pic1.jpg' 
         },
         { 
-          title: 'Dedicated Desk', 
-          shortText: 'Your own desk in a shared room.', 
-          fullText: 'A dedicated desk gives you the benefit of a professional workspace with the flexibility of a shared office. You get a permanent spot where you can leave your belongings and focus on your work.',
-          imageUrl: 'images/plans/pic2.jpg' 
+          title: 'Prime Hall', 
+          shortText: 'Perfect for business and pleasure.', 
+          fullText: 'A dedicated VIP space that offers the benefit of privacy with professional service. Ideal for small to medium-sized groups.',
+          imageUrl: 'images/vip/pic2.jpg' 
         },
         { 
-          title: 'Virtual Office', 
-          shortText: 'Professional address & services.', 
-          fullText: 'Establish a presence with a professional business address. Our virtual office plans include mail handling and optional phone services, perfect for remote workers and start-ups.',
-          imageUrl: 'images/plans/pic3.jpg' 
+          title: 'Elite Club', 
+          shortText: 'Exclusive membership feel.', 
+          fullText: 'A sophisticated atmosphere for members and special guests. Includes full bar service and private administrative support.',
+          imageUrl: 'images/vip/pic3.jpg' 
         },
         { 
-          title: 'Meeting Rooms', 
-          shortText: 'Full tech for your meetings.', 
-          fullText: 'Modern meeting rooms equipped with top-tier presentation technology and seamless connectivity. Available hourly or for full days, including coffee and administrative support.',
-          imageUrl: 'images/plans/pic4.jpg' 
+          title: 'Tech Lounge', 
+          shortText: 'Modern tech for your meetings.', 
+          fullText: 'State-of-the-art lounge equipped with top-tier presentation technology and seamless connectivity.',
+          imageUrl: 'images/vip/pic4.jpg' 
         }
       ]
     },
     ru: {
-      title: 'Планы и Варианты',
-      subtitle: 'Гибкие решения для любых нужд',
-      description: ['Выбирайте из множества индивидуальных планов — от отдельных рабочих мест до многокомнатных офисов.'],
+      title: 'ВИП Опции',
+      subtitle: 'Эксклюзивные залы для ваших мероприятий',
+      description: ['Выбирайте из наших премиальных ВИП-залов, созданных для роскоши и уединения.'],
       layoutType: 'plansGrid',
       plansData: [
         { 
-          title: 'Личный Офис', 
-          shortText: 'Ваше выделенное безопасное пространство.', 
-          fullText: 'Наши частные офисы обеспечивают профессиональную, тихую обстановку, подходящую для команд малого и среднего размера. Каждый офис полностью меблирован.',
-          imageUrl: 'images/plans/pic1.jpg' 
+          title: 'Королевский Сюит', 
+          shortText: 'Высший уровень роскоши.', 
+          fullText: 'Наши королевские сюиты обеспечивают профессиональную обстановку для высококлассных встреч.',
+          imageUrl: 'images/vip/pic1.jpg' 
         },
         { 
-          title: 'Закрепленное Место', 
-          shortText: 'Ваш стол в общим зале.', 
-          fullText: 'Закрепленный рабочий стол дает вам преимущество профессионального рабочего пространства с гибкостью общего офиса.',
-          imageUrl: 'images/plans/pic2.jpg' 
+          title: 'Прайм Зал', 
+          shortText: 'Идеально для бизнеса и отдыха.', 
+          fullText: 'Специальное ВИП-пространство, предлагающее приватность и профессиональный сервис.',
+          imageUrl: 'images/vip/pic2.jpg' 
         },
         { 
-          title: 'Виртуальный Офис', 
-          shortText: 'Профессиональный адрес и услуги.', 
-          fullText: 'Создайте присутствие с профессиональным бизнес-адресом. Наши планы включают обработку почты и дополнительные телефонные услуги.',
-          imageUrl: 'images/plans/pic3.jpg' 
+          title: 'Элитный Клуб', 
+          shortText: 'Эксклюзивная атмосфера клуба.', 
+          fullText: 'Утонченная атмосфера для членов клуба и особых гостей. Включает обслуживание в баре.',
+          imageUrl: 'images/vip/pic3.jpg' 
         },
         { 
-          title: 'Переговорные', 
-          shortText: 'Полное оснащение для встреч.', 
-          fullText: 'Современные конференц-залы, оснащенные первоклассным презентационным оборудованием и бесперебойной связью.',
-          imageUrl: 'images/plans/pic4.jpg' 
+          title: 'Техно Лаундж', 
+          shortText: 'Современные технологии для встреч.', 
+          fullText: 'Зал, оснащенный первоклассным презентационным оборудованием.',
+          imageUrl: 'images/vip/pic4.jpg' 
         }
       ]
     },
     am: {
-      title: 'Պլաններ',
-      subtitle: 'Ճկուն տարբերակներ յուրաքանչյուրի համար',
-      description: ['Ընտրեք հարմարեցված պլանների լայն տեսականուց՝ անհատական սեղաններից մինչև ամբողջական գրասենյակներ:'],
+      title: 'VIP Սրահներ',
+      subtitle: 'Բացառիկ տարբերակներ Ձեր միջոցառումների համար',
+      description: ['Ընտրեք մեր պրեմիում VIP սրահներից՝ նախատեսված շքեղության և գաղտնիության համար:'],
       layoutType: 'plansGrid',
       plansData: [
         { 
@@ -94,7 +94,7 @@ export const plansData: SectionTranslations = {
             'Ամբողջ տարածքի մաքրության ապահովում',
             'Ընդարձակ կանաչ գոտի հանգստի համար (Green zone)'
           ],
-          imageUrl: 'images/plans/pic1.jpg' 
+          imageUrl: 'images/vip/pic1.jpg' 
         },
         { 
           title: 'STANDARD +', 
@@ -121,7 +121,7 @@ export const plansData: SectionTranslations = {
             'Ընդարձակ հանդիպումների սրահ (Conference hall) (ամսական 4ժ)',
             'Սերվերային տարածքի տրամադրում (unit)'
           ],
-          imageUrl: 'images/plans/pic2.jpg' 
+          imageUrl: 'images/vip/pic2.jpg' 
         },
         { 
           title: 'PREMIUM', 
@@ -149,7 +149,7 @@ export const plansData: SectionTranslations = {
             'Ընդարձակ հանդիպումների սրահ (Conference hall) (ամսական 4ժ)',
             'Սերվերային տարածքի տրամադրում (unit)'
           ],
-          imageUrl: 'images/plans/pic3.jpg' 
+          imageUrl: 'images/vip/pic3.jpg' 
         },
         { 
           title: 'PREMIUM +', 
@@ -181,7 +181,7 @@ export const plansData: SectionTranslations = {
             'Սերվերային տարածքի տրամադրում (unit)',
             'Տանիքում բացօթյա ռեստորան-սրճարան, սիգար-բար, ֆուդ կորտ'
           ],
-          imageUrl: 'images/plans/pic4.jpg' 
+          imageUrl: 'images/vip/pic4.jpg' 
         }
       ]
     }
