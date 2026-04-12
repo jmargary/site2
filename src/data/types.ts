@@ -24,6 +24,7 @@ export type LanguageData = {
   featureGrid?: { title: string; text: string; imageUrl: string }[];
   panelBackground?: string;
   menuItems?: { title: string; subItems?: string[] }[];
+  secondaryGrid?: string[];
   layoutType?: 'standard' | 'smallCarousel' | 'multiSlide' | 'plansGrid' | 'alternatingList' | 'featureGrid' | 'contactForm' | 'menuList';
 };
 
