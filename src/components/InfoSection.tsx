@@ -599,7 +599,7 @@ export function InfoSection() {
   );
 }
 
-function ImageCarousel({ slides, isDefault, layoutType, autoSlide = true }: { slides: SlideData[], isDefault?: boolean, layoutType?: 'standard' | 'smallCarousel' | 'multiSlide' | 'plansGrid' | 'alternatingList' | 'featureGrid' | 'contactForm', autoSlide?: boolean }) {
+function ImageCarousel({ slides, isDefault, layoutType, autoSlide = true }: { slides: SlideData[], isDefault?: boolean, layoutType?: 'standard' | 'smallCarousel' | 'multiSlide' | 'plansGrid' | 'alternatingList' | 'featureGrid' | 'contactForm' | 'menuList', autoSlide?: boolean }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const isSmall = layoutType === 'smallCarousel';
