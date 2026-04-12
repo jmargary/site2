@@ -2,7 +2,7 @@ import type { SectionTranslations } from '../types';
 
 export const vipData: SectionTranslations = {
   id: 'vip',
-  btnLabel: { en: 'VIP Halls', ru: 'ВИП-залы', am: 'VIP սրահներ' },
+  btnLabel: { en: 'VIP Halls', ru: 'VIP-залы', am: 'VIP սրահներ' },
   content: {
     en: {
       title: 'VIP Options',

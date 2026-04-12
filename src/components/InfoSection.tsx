@@ -155,7 +155,7 @@ export function InfoSection() {
               <h2
                 className="info-panel-title"
                 style={{
-                  fontSize: 'clamp(2rem, 8vw, 2.75rem)',
+                  fontSize: 'clamp(1.5rem, 6vw, 2.2rem)', // Standardized smaller size
                   marginBottom: '0.4rem',
                   fontWeight: 800,
                   color: '#fff',
@@ -578,6 +578,7 @@ function ImageCarousel({ slides, isDefault, layoutType, autoSlide = true }: { sl
         style={
           isSmall ? { height: 'auto', aspectRatio: '1 / 1', maxWidth: '400px' } :
             isMulti ? { height: 'auto', aspectRatio: '1 / 1', overflow: 'hidden' } :
+              isDefault ? { height: 'auto', aspectRatio: '16 / 9' } : // Use cinematic ratio for welcome
               {}
         }
       >
@@ -607,30 +608,40 @@ function ImageCarousel({ slides, isDefault, layoutType, autoSlide = true }: { sl
               {(slide.title || slide.topText || slide.subtitle) && (
                 <div className="carousel-overlay">
                   <div className="carousel-text-box" style={{ 
-                  background: 'rgba(0, 0, 0, 0.7)',
-                  backdropFilter: 'blur(10px)',
-                  padding: '1.5rem', 
-                  width: isMulti ? '90%' : 'auto' 
+                    background: '#0f1115', // Main background color
+                    backdropFilter: 'blur(8px)',
+                    padding: '0.8rem 1.4rem', 
+                    width: isMulti ? '90%' : 'auto',
+                    borderRadius: '8px',
+                    border: '1px solid #c5a059', // Gold border
+                    boxShadow: '0 4px 15px rgba(0,0,0,0.5)'
                 }}>
                     {slide.topText && (
-                      <p style={{ margin: 0, fontSize: isMulti ? '0.7rem' : '0.9rem', color: '#ccc', letterSpacing: '1px', marginBottom: '0.5rem', fontWeight: 600 }}>
+                      <p style={{ margin: 0, fontSize: isMulti ? '0.6rem' : '0.75rem', color: '#ccc', letterSpacing: '1px', marginBottom: '0.2rem', fontWeight: 600 }}>
                         {slide.topText}
                       </p>
                     )}
-                    <h2 className="info-panel-title" style={{ fontSize: isMulti ? '1.1rem' : 'clamp(1.2rem, 5vw, 1.75rem)', marginBottom: '0.3rem', color: '#fff', fontWeight: 800, lineHeight: 1.2 }}>
+                    <h2 className="info-panel-title" style={{ 
+                      fontSize: isMulti ? '0.9rem' : '0.95rem', // Significantly smaller text
+                      marginBottom: '0', 
+                      color: '#fff', 
+                      fontWeight: 700, 
+                      lineHeight: 1.2,
+                      letterSpacing: '0.5px'
+                    }}>
                       {slide.title}
                     </h2>
                     {slide.subtitle && (
-                      <p className="info-panel-subtitle" style={{ margin: 0, fontSize: isMulti ? '0.75rem' : '0.95rem', color: 'rgba(255,255,255,0.85)', fontWeight: 500 }}>
+                      <p className="info-panel-subtitle" style={{ margin: 0, fontSize: '0.8rem', color: 'rgba(255,255,255,0.85)', fontWeight: 500, marginTop: '0.2rem' }}>
                         {slide.subtitle}
                       </p>
                     )}
                     {slide.stats && (
-                      <div style={{ display: 'flex', gap: '1rem', marginTop: '0.8rem', width: '100%', justifyContent: isDefault ? 'center' : 'flex-start' }}>
+                      <div style={{ display: 'flex', gap: '0.8rem', marginTop: '0.5rem', width: '100%', justifyContent: isDefault ? 'center' : 'flex-start' }}>
                         {slide.stats.map((stat, sIdx) => (
                           <div key={sIdx} style={{ display: 'flex', flexDirection: 'column', alignItems: isDefault ? 'center' : 'flex-start' }}>
-                            <span style={{ fontSize: isMulti ? '1rem' : '1.6rem', fontWeight: 800, color: '#fff', marginBottom: '0.1rem' }}>{stat.value}</span>
-                            <span style={{ fontSize: isMulti ? '0.6rem' : '0.8rem', color: '#bbb', lineHeight: 1.2, maxWidth: '120px' }}>{stat.label}</span>
+                            <span style={{ fontSize: isMulti ? '0.8rem' : '1.1rem', fontWeight: 800, color: '#fff' }}>{stat.value}</span>
+                            <span style={{ fontSize: '0.65rem', color: '#bbb', lineHeight: 1.2 }}>{stat.label}</span>
                           </div>
                         ))}
                       </div>
