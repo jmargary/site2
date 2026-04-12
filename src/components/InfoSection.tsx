@@ -608,13 +608,13 @@ function ImageCarousel({ slides, isDefault, layoutType, autoSlide = true }: { sl
               {(slide.title || slide.topText || slide.subtitle) && (
                 <div className="carousel-overlay">
                   <div className="carousel-text-box" style={{ 
-                    background: (activeId === 'default' || activeId === null) ? 'rgba(0, 0, 0, 0.6)' : '#0f1115', // Lighter for default
+                    background: isDefault ? 'rgba(0, 0, 0, 0.6)' : '#0f1115', 
                     backdropFilter: 'blur(8px)',
                     padding: '0.8rem 1.4rem', 
                     width: isMulti ? '90%' : 'auto',
                     borderRadius: '8px',
-                    border: (activeId === 'default' || activeId === null) ? 'none' : '1px solid #c5a059', // Border only for others
-                    boxShadow: (activeId === 'default' || activeId === null) ? 'none' : '0 4px 15px rgba(0,0,0,0.5)'
+                    border: isDefault ? 'none' : '1px solid #c5a059', 
+                    boxShadow: isDefault ? 'none' : '0 4px 15px rgba(0,0,0,0.5)'
                 }}>
                     {slide.topText && (
                       <p style={{ margin: 0, fontSize: isMulti ? '0.6rem' : '0.75rem', color: '#ccc', letterSpacing: '1px', marginBottom: '0.2rem', fontWeight: 600 }}>
