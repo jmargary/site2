@@ -432,7 +432,7 @@ export function InfoSection() {
 
           {/* Main Category Description */}
           {(languageData.layoutType !== 'plansGrid' && languageData.layoutType !== 'alternatingList' && languageData.layoutType !== 'featureGrid') && (
-            <div className="info-panel-desc">
+            <div className={`info-panel-desc ${(activeId === 'default' || activeId === null) ? 'description-ornamented' : ''}`}>
               {languageData.description.map((p, idx) => (
                 <p key={idx} style={{ marginBottom: '1.25rem', fontSize: '1.15rem', lineHeight: 1.7, color: 'rgba(255, 255, 255, 0.85)', fontWeight: 500, maxWidth: '800px' }}>
                   {p}
