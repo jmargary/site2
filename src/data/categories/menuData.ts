@@ -10,13 +10,34 @@ export const menuData: SectionTranslations = {
       description: [],
       layoutType: 'menuList',
       menuItems: [
-        { title: 'Starters' },
-        { title: 'Salads' },
-        { title: 'Soups' },
-        { title: 'Hot Dishes' },
-        { title: 'Grill / Tandoor' },
-        { title: 'Side Dishes' },
-        { title: 'Sauces' },
+        { 
+          title: 'Starters', 
+          images: ['images/menu/m1.png', 'images/menu/m1.1.png'] 
+        },
+        { 
+          title: 'Salads', 
+          images: ['images/menu/m2.1.png', 'images/menu/m2.2.png', 'images/menu/m2.3.png'] 
+        },
+        { 
+          title: 'Soups', 
+          images: ['images/menu/m3.1.png'] 
+        },
+        { 
+          title: 'Hot Dishes', 
+          images: ['images/menu/m4.1.png', 'images/menu/m4.2.png', 'images/menu/m4.3.png', 'images/menu/m4.4.png', 'images/menu/m4.5.png'] 
+        },
+        { 
+          title: 'Grill / Tandoor', 
+          images: ['images/menu/m5.1.png', 'images/menu/m5.2.png'] 
+        },
+        { 
+          title: 'Side Dishes', 
+          images: ['images/menu/m6.1.png'] 
+        },
+        { 
+          title: 'Sauces', 
+          images: ['images/menu/m7.1.png'] 
+        },
         { 
           title: 'Beverages',
           subItems: [
@@ -31,9 +52,10 @@ export const menuData: SectionTranslations = {
             'Beer',
             'Soft Drinks',
             'Coffee / Tea'
-          ]
+          ],
+          images: ['images/menu/m8.1.jpg', 'images/menu/m8.2.jpg', 'images/menu/m8.3.jpg', 'images/menu/m8.4.jpg', 'images/menu/m8.5.jpg', 'images/menu/m8.6.jpg']
         },
-        { title: 'Desserts' }
+        { title: 'Desserts', images: ['images/menu/m9.jpg'] }
       ]
     },
     ru: { 
@@ -42,13 +64,34 @@ export const menuData: SectionTranslations = {
       description: [],
       layoutType: 'menuList',
       menuItems: [
-        { title: 'Закуски' },
-        { title: 'Салаты' },
-        { title: 'Супы' },
-        { title: 'Горячие блюда' },
-        { title: 'Мангал / Тонир' },
-        { title: 'Гарниры' },
-        { title: 'Соусы' },
+        { 
+          title: 'Закуски', 
+          images: ['images/menu/m1.png', 'images/menu/m1.1.png'] 
+        },
+        { 
+          title: 'Салаты', 
+          images: ['images/menu/m2.1.png', 'images/menu/m2.2.png', 'images/menu/m2.3.png'] 
+        },
+        { 
+          title: 'Супы', 
+          images: ['images/menu/m3.1.png'] 
+        },
+        { 
+          title: 'Горячие блюда', 
+          images: ['images/menu/m4.1.png', 'images/menu/m4.2.png', 'images/menu/m4.3.png', 'images/menu/m4.4.png', 'images/menu/m4.5.png'] 
+        },
+        { 
+          title: 'Мангал / Тонир', 
+          images: ['images/menu/m5.1.png', 'images/menu/m5.2.png'] 
+        },
+        { 
+          title: 'Гарниры', 
+          images: ['images/menu/m6.1.png'] 
+        },
+        { 
+          title: 'Соусы', 
+          images: ['images/menu/m7.1.png'] 
+        },
         { 
           title: 'Напитки',
           subItems: [
@@ -63,9 +106,10 @@ export const menuData: SectionTranslations = {
             'Пиво',
             'Безалкагольные напитки',
             'Кофе / Чай'
-          ]
+          ],
+          images: ['images/menu/m8.1.jpg', 'images/menu/m8.2.jpg', 'images/menu/m8.3.jpg', 'images/menu/m8.4.jpg', 'images/menu/m8.5.jpg', 'images/menu/m8.6.jpg']
         },
-        { title: 'Десерты' }
+        { title: 'Десерты', images: ['images/menu/m9.jpg'] }
       ]
     },
     am: { 
@@ -74,13 +118,34 @@ export const menuData: SectionTranslations = {
       description: [],
       layoutType: 'menuList',
       menuItems: [
-        { title: 'Նախուտեստներ' },
-        { title: 'Աղցաններ' },
-        { title: 'Ապուրներ' },
-        { title: 'Տաք ուտեստներ' },
-        { title: 'Մանղալ/թոնիր' },
-        { title: 'Խավարտներ' },
-        { title: 'Սոուսներ' },
+        { 
+          title: 'Նախուտեստներ', 
+          images: ['images/menu/m1.png', 'images/menu/m1.1.png'] 
+        },
+        { 
+          title: 'Աղցաններ', 
+          images: ['images/menu/m2.1.png', 'images/menu/m2.2.png', 'images/menu/m2.3.png'] 
+        },
+        { 
+          title: 'Ապուրներ', 
+          images: ['images/menu/m3.1.png'] 
+        },
+        { 
+          title: 'Տաք ուտեստներ', 
+          images: ['images/menu/m4.1.png', 'images/menu/m4.2.png', 'images/menu/m4.3.png', 'images/menu/m4.4.png', 'images/menu/m4.5.png'] 
+        },
+        { 
+          title: 'Մանղալ/թոնիր', 
+          images: ['images/menu/m5.1.png', 'images/menu/m5.2.png'] 
+        },
+        { 
+          title: 'Խավարտներ', 
+          images: ['images/menu/m6.1.png'] 
+        },
+        { 
+          title: 'Սոուսներ', 
+          images: ['images/menu/m7.1.png'] 
+        },
         { 
           title: 'Խմիչքներ',
           subItems: [
@@ -95,9 +160,10 @@ export const menuData: SectionTranslations = {
             'Գարեջուր',
             'Զովացուցիչ ըմպելիքներ',
             'Սուրճ / Թեյ'
-          ]
+          ],
+          images: ['images/menu/m8.1.jpg', 'images/menu/m8.2.jpg', 'images/menu/m8.3.jpg', 'images/menu/m8.4.jpg', 'images/menu/m8.5.jpg', 'images/menu/m8.6.jpg']
         },
-        { title: 'Աղանդեր' }
+        { title: 'Աղանդեր', images: ['images/menu/m9.jpg'] }
       ]
     }
   }

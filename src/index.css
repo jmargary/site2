@@ -710,6 +710,11 @@ h1 {
   }
 }
 
+.menu-img-hover:hover {
+  transform: scale(1.05);
+  border-color: #c5a059 !important;
+}
+
 /* Ornamented Description for Default section */
 .description-ornamented {
   background: #0f1115;

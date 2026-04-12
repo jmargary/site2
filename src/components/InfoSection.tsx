@@ -442,45 +442,89 @@ export function InfoSection() {
 
           {/* Menu List Layout (New) */}
           {languageData.layoutType === 'menuList' && (
-            <div className="description-ornamented" style={{ width: '100%', maxWidth: '800px' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <div className="description-ornamented" style={{ width: '100%', maxWidth: '950px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
                 {languageData.menuItems?.map((item, idx) => (
-                  <div key={idx}>
-                    <h3 style={{ 
-                      color: '#c5a059', 
-                      fontSize: '1.4rem', 
-                      fontWeight: 700, 
-                      textTransform: 'uppercase', 
-                      letterSpacing: '1px',
-                      marginBottom: item.subItems ? '0.8rem' : '0'
-                    }}>
-                      {item.title}
-                    </h3>
-                    
-                    {item.subItems && (
-                      <div style={{ 
-                        display: 'flex', 
-                        flexWrap: 'wrap', 
-                        gap: '0.5rem 1.2rem',
-                        marginTop: '0.4rem'
+                  <div key={idx} style={{ 
+                    display: 'flex', 
+                    flexDirection: 'row', 
+                    gap: '2rem', 
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-start',
+                    flexWrap: 'wrap' // Mobile support
+                  }}>
+                    {/* Left Side: Text */}
+                    <div style={{ flex: '1 1 300px' }}>
+                      <h3 style={{ 
+                        color: '#c5a059', 
+                        fontSize: '1.4rem', 
+                        fontWeight: 700, 
+                        textTransform: 'uppercase', 
+                        letterSpacing: '1px',
+                        marginBottom: item.subItems ? '0.8rem' : '0'
                       }}>
-                        {item.subItems.map((sub, sIdx) => (
-                          <span key={sIdx} style={{ 
-                            color: 'rgba(255,255,255,0.7)', 
-                            fontSize: '0.9rem',
-                            fontWeight: 500
-                          }}>
-                            {sub}
-                          </span>
+                        {item.title}
+                      </h3>
+                      
+                      {item.subItems && (
+                        <div style={{ 
+                          display: 'flex', 
+                          flexDirection: 'column',
+                          gap: '0.4rem',
+                          marginTop: '0.6rem'
+                        }}>
+                          {item.subItems.map((sub, sIdx) => (
+                            <span key={sIdx} style={{ 
+                              color: 'rgba(255,255,255,0.7)', 
+                              fontSize: '0.95rem',
+                              fontWeight: 500
+                            }}>
+                              • {sub}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Right Side: Images */}
+                    {item.images && item.images.length > 0 && (
+                      <div style={{ 
+                        flex: '1 1 300px', 
+                        display: 'grid', 
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))', 
+                        gap: '0.75rem',
+                        alignItems: 'center'
+                      }}>
+                        {item.images.map((img, iIdx) => (
+                          <div 
+                            key={iIdx} 
+                            style={{ 
+                              aspectRatio: '1/1', 
+                              borderRadius: '8px', 
+                              overflow: 'hidden', 
+                              cursor: 'zoom-in',
+                              border: '1px solid rgba(255,255,255,0.1)',
+                              transition: 'transform 0.3s ease'
+                            }}
+                            className="menu-img-hover"
+                            onClick={() => setSelectedImage(img)}
+                          >
+                            <img 
+                              src={img} 
+                              alt={`${item.title} dish`} 
+                              style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                            />
+                          </div>
                         ))}
                       </div>
                     )}
 
                     {idx < (languageData.menuItems?.length || 0) - 1 && (
                       <div style={{ 
+                        width: '100%',
                         height: '1px', 
                         background: 'linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.3), transparent)', 
-                        marginTop: '1.5rem' 
+                        marginTop: '0.5rem' 
                       }} />
                     )}
                   </div>
