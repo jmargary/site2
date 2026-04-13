@@ -21,9 +21,13 @@ export type LanguageData = {
   slides?: SlideData[];
   plansData?: PlanItem[];
   alternatingList?: { title: string; text: string; imageUrl: string }[];
-  featureGrid?: { title: string; text: string; imageUrl: string }[];
-  panelBackground?: string;
-  menuItems?: { title: string; subItems?: string[]; images?: string[] }[];
+  menuItems?: { 
+    title: string; 
+    subItems?: string[]; 
+    images?: string[];
+    dishes?: { name: string; price: string }[];
+    sections?: { dishes: { name: string; price: string }[]; images: string[] }[];
+  }[];
   secondaryGrid?: string[];
   layoutType?: 'standard' | 'smallCarousel' | 'multiSlide' | 'plansGrid' | 'alternatingList' | 'featureGrid' | 'contactForm' | 'menuList';
 };
