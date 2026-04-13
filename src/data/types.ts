@@ -30,6 +30,15 @@ export type LanguageData = {
     dishes?: { name: string; price: string }[];
     sections?: { dishes: { name: string; price: string }[]; images: string[] }[];
   }[];
+  contactInfo?: {
+    deliveryTitle: string;
+    deliveryAreas: string[];
+    actionText: string;
+    phoneLabel: string;
+    phoneValue: string;
+    addressLabel: string;
+    addressValue: string;
+  };
   secondaryGrid?: string[];
   layoutType?: 'standard' | 'smallCarousel' | 'multiSlide' | 'plansGrid' | 'alternatingList' | 'featureGrid' | 'contactForm' | 'menuList' | 'triangleGallery';
 };

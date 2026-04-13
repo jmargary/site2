@@ -12,25 +12,25 @@ export const vipData: SectionTranslations = {
       plansData: [
         { 
           title: 'VIP1', 
-          shortText: 'նախատեսված մինչև 12 անձի համար', 
+          shortText: 'designed for up to 12 persons', 
           fullText: '',
           imageUrl: 'images/vip/vip1.jpg' 
         },
         { 
           title: 'VIP2', 
-          shortText: 'նախատեսված մինչև 14 անձի համար', 
+          shortText: 'designed for up to 14 persons', 
           fullText: '',
           imageUrl: 'images/vip/vip2.jpg' 
         },
         { 
           title: 'VIP3', 
-          shortText: 'նախատեսված մինչև 22 անձի համար', 
+          shortText: 'designed for up to 22 persons', 
           fullText: '',
           imageUrl: 'images/vip/vip3.jpg' 
         },
         { 
           title: 'VIP4', 
-          shortText: 'նախատեսված մինչև 12 անձի համար', 
+          shortText: 'designed for up to 12 persons', 
           fullText: '',
           imageUrl: 'images/vip/vip4.jpg' 
         }
@@ -44,25 +44,25 @@ export const vipData: SectionTranslations = {
       plansData: [
         { 
           title: 'VIP1', 
-          shortText: 'նախատեսված մինչև 12 անձի համար', 
+          shortText: 'рассчитан на 12 человек', 
           fullText: '',
           imageUrl: 'images/vip/vip1.jpg' 
         },
         { 
           title: 'VIP2', 
-          shortText: 'նախատեսված մինչև 14 անձի համար', 
+          shortText: 'рассчитан на 14 человек', 
           fullText: '',
           imageUrl: 'images/vip/vip2.jpg' 
         },
         { 
           title: 'VIP3', 
-          shortText: 'նախատեսված մինչև 22 անձի համար', 
+          shortText: 'рассчитан на 22 человека', 
           fullText: '',
           imageUrl: 'images/vip/vip3.jpg' 
         },
         { 
           title: 'VIP4', 
-          shortText: 'նախատեսված մինչև 12 անձի համար', 
+          shortText: 'рассчитан на 12 человек', 
           fullText: '',
           imageUrl: 'images/vip/vip4.jpg' 
         }

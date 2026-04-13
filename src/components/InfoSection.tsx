@@ -186,79 +186,73 @@ export function InfoSection() {
             </>
           )}
 
-          {/* Contact Form Layout */}
-          {languageData.layoutType === 'contactForm' && (
-            <div style={{ display: 'flex', gap: '4rem', alignItems: 'flex-start', flexWrap: 'wrap', marginTop: '2rem' }}>
-              {/* Form */}
-              <form
-                style={{ flex: 1, minWidth: '280px', display: 'flex', flexDirection: 'column', gap: '1.2rem' }}
-                onSubmit={e => { e.preventDefault(); }}
-              >
-                <input
-                  name="name"
-                  type="text"
-                  required
-                  placeholder="Անուն *"
-                  style={{
-                    padding: '1rem 1.4rem', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.25)',
-                    background: 'rgba(0,0,0,0.6)', color: '#fff', fontSize: '1rem', outline: 'none',
-                    backdropFilter: 'blur(8px)'
-                  }}
-                />
-                <input
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="Էլ․ հասցե *"
-                  style={{
-                    padding: '1rem 1.4rem', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.25)',
-                    background: 'rgba(0,0,0,0.6)', color: '#fff', fontSize: '1rem', outline: 'none',
-                    backdropFilter: 'blur(8px)'
-                  }}
-                />
-                <textarea
-                  name="message"
-                  required
-                  placeholder="Հաղորդագրություն *"
-                  rows={5}
-                  style={{
-                    padding: '1rem 1.4rem', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.25)',
-                    background: 'rgba(0,0,0,0.6)', color: '#fff', fontSize: '1rem', outline: 'none',
-                    resize: 'vertical', backdropFilter: 'blur(8px)', fontFamily: 'inherit'
-                  }}
-                />
-                <button
-                  type="submit"
-                  style={{
-                    padding: '1rem 2.5rem', borderRadius: '12px', border: 'none',
-                    background: '#fff', color: '#000', fontSize: '1rem', fontWeight: 700,
-                    cursor: 'pointer', alignSelf: 'flex-start', letterSpacing: '0.5px',
-                    transition: 'opacity 0.2s'
-                  }}
-                  onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
-                  onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
-                >
-                  Դիմել
-                </button>
-              </form>
-
-              {/* Contact Info */}
-              <div style={{ flex: 1, minWidth: '220px', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-                {[
-                  { label: 'Հեռախոսահամար', value: '(+374) 44 33 99 99' },
-                  { label: 'Էլ․ հասցե', value: 'info@upandup.am' },
-                  { label: 'Հասցե', value: 'ՀՀ, ք․ Երևան, Գևորգ Չաուշ 11/5' },
-                ].map(item => (
-                  <div key={item.label}>
-                    <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '0.5rem', fontWeight: 700 }}>
-                      {item.label}
-                    </p>
-                    <p style={{ color: '#fff', fontSize: '1.3rem', fontWeight: 800 }}>
-                      {item.value}
-                    </p>
-                  </div>
-                ))}
+          {/* Contact and Delivery Layout */}
+          {languageData.layoutType === 'contactForm' && languageData.contactInfo && (
+            <div className="animate-slide" style={{ 
+              display: 'flex', 
+              flexDirection: 'column', 
+              gap: '3rem', 
+              alignItems: 'center', 
+              marginTop: '1rem',
+              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('./images/business/background.jpg')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              padding: '3.5rem 2rem',
+              borderRadius: '24px',
+              border: '1px solid rgba(197, 160, 89, 0.3)',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.5)',
+              textAlign: 'center'
+            }}>
+              
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                <h3 style={{ color: '#c5a059', fontSize: '1.6rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.5rem' }}>
+                  {languageData.contactInfo.deliveryTitle}
+                </h3>
+                <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.8rem' }}>
+                  {languageData.contactInfo.deliveryAreas.map((area, idx) => (
+                    <span key={idx} style={{ 
+                      color: '#fff', 
+                      fontSize: '1.1rem', 
+                      fontWeight: 600, 
+                      padding: '0.6rem 1.4rem', 
+                      background: 'rgba(197, 160, 89, 0.1)', 
+                      borderRadius: '30px',
+                      border: '1px solid rgba(197, 160, 89, 0.25)',
+                      boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
+                      letterSpacing: '0.5px'
+                    }}>
+                      {area}
+                    </span>
+                  ))}
+                </div>
               </div>
+
+              <div style={{ width: '80%', height: '1px', background: 'linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.3), transparent)' }} />
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center' }}>
+                <p style={{ color: '#c5a059', fontSize: '1.5rem', fontWeight: 700, letterSpacing: '0.5px', textShadow: '0 2px 4px rgba(0,0,0,0.5)', margin: 0 }}>
+                  {languageData.contactInfo.actionText}
+                </p>
+                <div style={{ display: 'flex', gap: '4rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+                    <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: 600 }}>
+                      {languageData.contactInfo.phoneLabel}
+                    </span>
+                    <a href={`tel:${languageData.contactInfo.phoneValue.replace(/\s+/g, '')}`} style={{ color: '#fff', fontSize: '1.8rem', fontWeight: 800, textDecoration: 'none' }}>
+                      {languageData.contactInfo.phoneValue}
+                    </a>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+                    <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: 600 }}>
+                      {languageData.contactInfo.addressLabel}
+                    </span>
+                    <span style={{ color: '#fff', fontSize: '1.8rem', fontWeight: 800 }}>
+                      {languageData.contactInfo.addressValue}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
             </div>
           )}
 
@@ -644,22 +638,21 @@ export function InfoSection() {
               flexWrap: 'wrap', 
               justifyContent: 'center', 
               alignItems: 'center',
-              gap: '1.5rem', 
+              gap: '0', // removed gap for interlocking effect
               marginTop: '3rem',
               marginBottom: '4rem',
-              background: '#222', // grey color background as requested
-              padding: '4rem 2rem',
+              background: '#0f1115', // Same as menu background
+              padding: '40px 20px',
               borderRadius: '24px',
-              border: '1px solid rgba(197, 160, 89, 0.3)',
-              boxShadow: 'inset 0 0 50px rgba(0,0,0,0.5)'
+              border: '1px solid rgba(197, 160, 89, 0.2)',
+              overflow: 'hidden',
+              position: 'relative'
             }}>
               {languageData.secondaryGrid.map((img, idx) => {
-                const shapes = [
-                  'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)', // Diamond
-                  'polygon(50% 0%, 100% 100%, 0% 100%)',         // Triangle Up
-                  'polygon(0% 0%, 100% 0%, 50% 100%)',           // Triangle Down
-                ];
-                const clipPath = shapes[idx % shapes.length];
+                // Different angles and thicknesses for golden "lines"
+                const lineThickness = (idx % 3 + 1) * 1.5;
+                const dropShadowBlur = (idx % 2 + 1) * 3;
+                
                 return (
                   <div
                     key={idx}
@@ -667,32 +660,34 @@ export function InfoSection() {
                     style={{ 
                       width: '240px',
                       height: '240px',
+                      margin: '-30px -40px', // negative margins to make them "continue each other"
                       position: 'relative',
                       cursor: 'zoom-in',
-                      filter: 'drop-shadow(0 0 3px #c5a059)', // golden lines
-                      transition: 'transform 0.4s ease, filter 0.4s ease',
+                      filter: `drop-shadow(0 0 ${lineThickness}px #c5a059)`,
+                      transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                      zIndex: Math.floor(Math.random() * 5), // random stacking
                       flexShrink: 0
                     }}
                     onMouseEnter={e => {
-                      e.currentTarget.style.transform = 'scale(1.08)';
-                      e.currentTarget.style.filter = 'drop-shadow(0 0 8px #c5a059) drop-shadow(0 0 15px rgba(197, 160, 89, 0.8))';
-                      e.currentTarget.style.zIndex = '10';
+                      e.currentTarget.style.transform = 'scale(1.15) rotate(5deg)';
+                      e.currentTarget.style.filter = `drop-shadow(0 0 12px #c5a059) drop-shadow(0 0 25px rgba(197, 160, 89, 0.8))`;
+                      e.currentTarget.style.zIndex = '50';
                     }}
                     onMouseLeave={e => {
-                      e.currentTarget.style.transform = 'scale(1)';
-                      e.currentTarget.style.filter = 'drop-shadow(0 0 3px #c5a059)';
+                      e.currentTarget.style.transform = 'scale(1) rotate(0deg)';
+                      e.currentTarget.style.filter = `drop-shadow(0 0 ${lineThickness}px #c5a059)`;
                       e.currentTarget.style.zIndex = '1';
                     }}
                   >
                     <img 
                       src={img} 
-                      alt="Gallery" 
+                      alt="Gallery Room" 
                       loading="lazy" 
                       style={{ 
                         width: '100%', 
                         height: '100%', 
                         objectFit: 'cover',
-                        clipPath: clipPath,
+                        clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)', // Pure rhombus
                         display: 'block'
                       }} 
                     />
