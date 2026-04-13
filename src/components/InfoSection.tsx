@@ -732,8 +732,6 @@ function ImageCarousel({ slides, isDefault, layoutType, autoSlide = true }: { sl
     return () => clearInterval(timer);
   }, [slides.length, maxIndex, slidesToShow, autoSlide, currentIndex]);
 
-  const currentSlide = slides[currentIndex];
-
   return (
     <div className="carousel-root" style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
       <div className={`carousel-wrapper ${isSmall ? 'carousel-wrapper--small' : ''} ${isMulti ? 'carousel-wrapper--multi' : ''}`}>
