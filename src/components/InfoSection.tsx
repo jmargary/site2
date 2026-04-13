@@ -651,7 +651,6 @@ export function InfoSection() {
               {languageData.secondaryGrid.map((img, idx) => {
                 // Different angles and thicknesses for golden "lines"
                 const lineThickness = (idx % 3 + 1) * 1.5;
-                const dropShadowBlur = (idx % 2 + 1) * 3;
                 
                 return (
                   <div
