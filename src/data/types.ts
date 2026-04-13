@@ -31,7 +31,7 @@ export type LanguageData = {
     sections?: { dishes: { name: string; price: string }[]; images: string[] }[];
   }[];
   secondaryGrid?: string[];
-  layoutType?: 'standard' | 'smallCarousel' | 'multiSlide' | 'plansGrid' | 'alternatingList' | 'featureGrid' | 'contactForm' | 'menuList';
+  layoutType?: 'standard' | 'smallCarousel' | 'multiSlide' | 'plansGrid' | 'alternatingList' | 'featureGrid' | 'contactForm' | 'menuList' | 'triangleGallery';
 };
 
 export type SectionTranslations = {

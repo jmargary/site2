@@ -459,29 +459,55 @@ export function InfoSection() {
                       {/* Left Side: Text */}
                       <div style={{ flex: '1 1 300px' }}>
                         {showTitle && (
-                          <h3 style={{ 
-                            color: '#c5a059', 
-                            fontSize: '1.5rem', 
-                            fontWeight: 800, 
-                            textTransform: 'uppercase', 
-                            letterSpacing: '1.5px',
-                            marginBottom: '1.5rem',
-                            borderBottom: '1px solid rgba(197, 160, 89, 0.2)',
-                            paddingBottom: '0.5rem',
-                            display: 'inline-block'
-                          }}>
-                            {item.title}
-                          </h3>
+                          <div style={{ width: '100%', textAlign: 'center', marginBottom: '2.5rem' }}>
+                            <h3 style={{ 
+                              color: '#c5a059', 
+                              fontSize: '1.75rem', 
+                              fontWeight: 800, 
+                              textTransform: 'uppercase', 
+                              letterSpacing: '2px',
+                              borderBottom: '1px solid rgba(197, 160, 89, 0.3)',
+                              paddingBottom: '0.75rem',
+                              display: 'inline-block'
+                            }}>
+                              {item.title}
+                            </h3>
+                          </div>
                         )}
                         
                         {dishes && (
                           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
-                            {dishes.map((dish, dIdx) => (
-                              <div key={dIdx} style={{ display: 'flex', flexDirection: 'column' }}>
-                                <span style={{ color: '#c5a059', fontSize: '1.1rem', fontWeight: 600, letterSpacing: '0.5px' }}>{dish.name}</span>
-                                <span style={{ color: '#fff', fontSize: '0.85rem', fontWeight: 500, opacity: 0.9, marginTop: '2px' }}>{dish.price}</span>
-                              </div>
-                            ))}
+                            {dishes.map((dish, dIdx) => {
+                              const isSubtitle = !dish.price || dish.price.trim() === '';
+                              return (
+                                <div key={dIdx} style={{ 
+                                  display: 'flex', 
+                                  flexDirection: 'column',
+                                  marginTop: isSubtitle && dIdx !== 0 ? '2rem' : '0',
+                                  borderLeft: isSubtitle ? '3px solid #c5a059' : 'none',
+                                  paddingLeft: isSubtitle ? '1rem' : '0',
+                                  background: isSubtitle ? 'rgba(197, 160, 89, 0.05)' : 'transparent',
+                                  paddingTop: isSubtitle ? '0.5rem' : '0',
+                                  paddingBottom: isSubtitle ? '0.5rem' : '0',
+                                  borderRadius: '4px'
+                                }}>
+                                  <span style={{ 
+                                    color: '#c5a059', 
+                                    fontSize: isSubtitle ? '1.25rem' : '1.1rem', 
+                                    fontWeight: isSubtitle ? 800 : 600, 
+                                    letterSpacing: isSubtitle ? '1px' : '0.5px',
+                                    textTransform: isSubtitle ? 'uppercase' : 'none'
+                                  }}>
+                                    {dish.name}
+                                  </span>
+                                  {!isSubtitle && (
+                                    <span style={{ color: '#fff', fontSize: '0.85rem', fontWeight: 500, opacity: 0.9, marginTop: '2px' }}>
+                                      {dish.price}
+                                    </span>
+                                  )}
+                                </div>
+                              );
+                            })}
                           </div>
                         )}
 
@@ -611,8 +637,73 @@ export function InfoSection() {
             </div>
           )}
 
+          {/* Main Category Triangle Gallery (New for Interior) */}
+          {languageData.layoutType === 'triangleGallery' && languageData.secondaryGrid && (
+            <div className="triangle-gallery animate-slide" style={{ 
+              display: 'flex', 
+              flexWrap: 'wrap', 
+              justifyContent: 'center', 
+              alignItems: 'center',
+              gap: '1.5rem', 
+              marginTop: '3rem',
+              marginBottom: '4rem',
+              background: '#222', // grey color background as requested
+              padding: '4rem 2rem',
+              borderRadius: '24px',
+              border: '1px solid rgba(197, 160, 89, 0.3)',
+              boxShadow: 'inset 0 0 50px rgba(0,0,0,0.5)'
+            }}>
+              {languageData.secondaryGrid.map((img, idx) => {
+                const shapes = [
+                  'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)', // Diamond
+                  'polygon(50% 0%, 100% 100%, 0% 100%)',         // Triangle Up
+                  'polygon(0% 0%, 100% 0%, 50% 100%)',           // Triangle Down
+                ];
+                const clipPath = shapes[idx % shapes.length];
+                return (
+                  <div
+                    key={idx}
+                    onClick={() => setSelectedImage(img)}
+                    style={{ 
+                      width: '240px',
+                      height: '240px',
+                      position: 'relative',
+                      cursor: 'zoom-in',
+                      filter: 'drop-shadow(0 0 3px #c5a059)', // golden lines
+                      transition: 'transform 0.4s ease, filter 0.4s ease',
+                      flexShrink: 0
+                    }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.transform = 'scale(1.08)';
+                      e.currentTarget.style.filter = 'drop-shadow(0 0 8px #c5a059) drop-shadow(0 0 15px rgba(197, 160, 89, 0.8))';
+                      e.currentTarget.style.zIndex = '10';
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.transform = 'scale(1)';
+                      e.currentTarget.style.filter = 'drop-shadow(0 0 3px #c5a059)';
+                      e.currentTarget.style.zIndex = '1';
+                    }}
+                  >
+                    <img 
+                      src={img} 
+                      alt="Gallery" 
+                      loading="lazy" 
+                      style={{ 
+                        width: '100%', 
+                        height: '100%', 
+                        objectFit: 'cover',
+                        clipPath: clipPath,
+                        display: 'block'
+                      }} 
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
           {/* Main Category Secondary Grid (if any) */}
-          {languageData.secondaryGrid && (
+          {languageData.layoutType !== 'triangleGallery' && languageData.secondaryGrid && (
             <div className="secondary-grid">
               {languageData.secondaryGrid.map((img, idx) => (
                 <div
