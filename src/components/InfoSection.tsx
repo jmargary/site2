@@ -767,24 +767,25 @@ function ImageCarousel({ slides, isDefault, layoutType, autoSlide = true }: { sl
                   marginRight: isMulti ? '1rem' : '0'
                 }}
               >
-                {!isMobile && (slide.title || slide.topText || slide.subtitle) && (
-                  <div className="carousel-overlay">
+                {(slide.title || slide.topText || slide.subtitle) && (
+                  <div className="carousel-overlay" style={isMobile ? { padding: '1rem', alignItems: 'flex-end' } : {}}>
                     <div className="carousel-text-box" style={{ 
-                      background: isDefault ? 'rgba(0, 0, 0, 0.6)' : '#0f1115', 
+                      background: isMobile ? 'rgba(15, 17, 21, 0.65)' : (isDefault ? 'rgba(0, 0, 0, 0.6)' : '#0f1115'), 
                       backdropFilter: 'blur(8px)',
-                      padding: '0.8rem 1.4rem', 
-                      width: isMulti ? '90%' : 'auto',
-                      borderRadius: '8px',
-                      border: isDefault ? 'none' : '1px solid #c5a059', 
-                      boxShadow: isDefault ? 'none' : '0 4px 15px rgba(0,0,0,0.5)'
+                      padding: isMobile ? '0.75rem 1rem' : '0.8rem 1.4rem', 
+                      width: isMobile ? '100%' : (isMulti ? '90%' : 'auto'),
+                      borderRadius: isMobile ? '12px' : '8px',
+                      border: (isDefault || isMobile) ? '1px solid rgba(197, 160, 89, 0.2)' : '1px solid #c5a059', 
+                      boxShadow: '0 4px 15px rgba(0,0,0,0.5)',
+                      textAlign: isMobile ? 'center' : 'left'
                   }}>
                       {slide.topText && (
-                        <p style={{ margin: 0, fontSize: isMulti ? '0.6rem' : '0.75rem', color: '#ccc', letterSpacing: '1px', marginBottom: '0.2rem', fontWeight: 600 }}>
+                        <p style={{ margin: 0, fontSize: isMobile ? '0.65rem' : (isMulti ? '0.6rem' : '0.75rem'), color: '#c5a059', letterSpacing: '1px', marginBottom: '0.2rem', fontWeight: 700, textTransform: 'uppercase' }}>
                           {slide.topText}
                         </p>
                       )}
                       <h2 className="info-panel-title" style={{ 
-                        fontSize: isMulti ? '0.9rem' : '0.95rem',
+                        fontSize: isMobile ? '1rem' : (isMulti ? '0.9rem' : '0.95rem'),
                         marginBottom: '0', 
                         color: '#fff', 
                         fontWeight: 700, 
@@ -794,16 +795,16 @@ function ImageCarousel({ slides, isDefault, layoutType, autoSlide = true }: { sl
                         {slide.title}
                       </h2>
                       {slide.subtitle && (
-                        <p className="info-panel-subtitle" style={{ margin: 0, fontSize: '0.8rem', color: 'rgba(255,255,255,0.85)', fontWeight: 500, marginTop: '0.2rem' }}>
+                        <p className="info-panel-subtitle" style={{ margin: 0, fontSize: isMobile ? '0.8rem' : '0.8rem', color: 'rgba(255,255,255,0.85)', fontWeight: 500, marginTop: '0.2rem' }}>
                           {slide.subtitle}
                         </p>
                       )}
                       {slide.stats && (
-                        <div style={{ display: 'flex', gap: '0.8rem', marginTop: '0.5rem', width: '100%', justifyContent: isDefault ? 'center' : 'flex-start' }}>
+                        <div style={{ display: 'flex', gap: '0.8rem', marginTop: '0.5rem', width: '100%', justifyContent: 'center' }}>
                           {slide.stats.map((stat, sIdx) => (
-                            <div key={sIdx} style={{ display: 'flex', flexDirection: 'column', alignItems: isDefault ? 'center' : 'flex-start' }}>
-                              <span style={{ fontSize: isMulti ? '0.8rem' : '1.1rem', fontWeight: 800, color: '#fff' }}>{stat.value}</span>
-                              <span style={{ fontSize: '0.65rem', color: '#bbb', lineHeight: 1.2 }}>{stat.label}</span>
+                            <div key={sIdx} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                              <span style={{ fontSize: isMobile ? '0.9rem' : (isMulti ? '0.8rem' : '1.1rem'), fontWeight: 800, color: '#fff' }}>{stat.value}</span>
+                              <span style={{ fontSize: '0.6rem', color: '#bbb', lineHeight: 1.2, textTransform: 'uppercase' }}>{stat.label}</span>
                             </div>
                           ))}
                         </div>
@@ -843,41 +844,6 @@ function ImageCarousel({ slides, isDefault, layoutType, autoSlide = true }: { sl
           </div>
         )}
       </div>
-
-      {isMobile && currentSlide && (currentSlide.title || currentSlide.topText || currentSlide.subtitle) && (
-        <div className="carousel-mobile-content animate-slide" style={{ 
-          marginTop: '1.5rem', 
-          background: 'rgba(255, 255, 255, 0.05)', 
-          padding: '1.5rem', 
-          borderRadius: '16px',
-          border: '1px solid rgba(197, 160, 89, 0.3)',
-          textAlign: 'center'
-        }}>
-          {currentSlide.topText && (
-            <p style={{ margin: 0, fontSize: '0.75rem', color: '#c5a059', letterSpacing: '1.5px', marginBottom: '0.5rem', fontWeight: 700, textTransform: 'uppercase' }}>
-              {currentSlide.topText}
-            </p>
-          )}
-          <h2 style={{ fontSize: '1.3rem', color: '#fff', fontWeight: 800, marginBottom: '0.6rem', lineHeight: 1.2 }}>
-            {currentSlide.title}
-          </h2>
-          {currentSlide.subtitle && (
-            <p style={{ margin: 0, fontSize: '1rem', color: 'rgba(255, 255, 255, 0.8)', fontWeight: 400, lineHeight: 1.5 }}>
-              {currentSlide.subtitle}
-            </p>
-          )}
-          {currentSlide.stats && (
-            <div style={{ display: 'flex', gap: '2rem', marginTop: '1.25rem', justifyContent: 'center' }}>
-              {currentSlide.stats.map((stat, sIdx) => (
-                <div key={sIdx} style={{ display: 'flex', flexDirection: 'column' }}>
-                  <span style={{ fontSize: '1.25rem', fontWeight: 800, color: '#fff' }}>{stat.value}</span>
-                  <span style={{ fontSize: '0.7rem', color: '#aaa', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{stat.label}</span>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      )}
     </div>
   );
 }
