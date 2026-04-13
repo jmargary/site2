@@ -631,68 +631,35 @@ export function InfoSection() {
             </div>
           )}
 
-          {/* Main Category Triangle Gallery (New for Interior) */}
+          {/* Main Category Simple Gallery (New for Interior) */}
           {languageData.layoutType === 'triangleGallery' && languageData.secondaryGrid && (
-            <div className="triangle-gallery animate-slide" style={{ 
-              display: 'flex', 
-              flexWrap: 'wrap', 
-              justifyContent: 'center', 
-              alignItems: 'center',
-              gap: '0', // removed gap for interlocking effect
-              marginTop: '3rem',
+            <div className="simple-gallery animate-slide" style={{ 
+              display: 'grid', 
+              gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', 
+              gap: '1.5rem', 
+              marginTop: '2rem',
               marginBottom: '4rem',
-              background: '#0f1115', // Same as menu background
-              padding: '40px 20px',
-              borderRadius: '24px',
-              border: '1px solid rgba(197, 160, 89, 0.2)',
-              overflow: 'hidden',
-              position: 'relative'
+              width: '100%'
             }}>
-              {languageData.secondaryGrid.map((img, idx) => {
-                // Different angles and thicknesses for golden "lines"
-                const lineThickness = (idx % 3 + 1) * 1.5;
-                
-                return (
-                  <div
-                    key={idx}
-                    onClick={() => setSelectedImage(img)}
-                    style={{ 
-                      width: '240px',
-                      height: '240px',
-                      margin: '-30px -40px', // negative margins to make them "continue each other"
-                      position: 'relative',
-                      cursor: 'zoom-in',
-                      filter: `drop-shadow(0 0 ${lineThickness}px #c5a059)`,
-                      transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-                      zIndex: Math.floor(Math.random() * 5), // random stacking
-                      flexShrink: 0
-                    }}
-                    onMouseEnter={e => {
-                      e.currentTarget.style.transform = 'scale(1.15) rotate(5deg)';
-                      e.currentTarget.style.filter = `drop-shadow(0 0 12px #c5a059) drop-shadow(0 0 25px rgba(197, 160, 89, 0.8))`;
-                      e.currentTarget.style.zIndex = '50';
-                    }}
-                    onMouseLeave={e => {
-                      e.currentTarget.style.transform = 'scale(1) rotate(0deg)';
-                      e.currentTarget.style.filter = `drop-shadow(0 0 ${lineThickness}px #c5a059)`;
-                      e.currentTarget.style.zIndex = '1';
-                    }}
-                  >
-                    <img 
-                      src={img} 
-                      alt="Gallery Room" 
-                      loading="lazy" 
-                      style={{ 
-                        width: '100%', 
-                        height: '100%', 
-                        objectFit: 'cover',
-                        clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)', // Pure rhombus
-                        display: 'block'
-                      }} 
-                    />
-                  </div>
-                );
-              })}
+              {languageData.secondaryGrid.map((img, idx) => (
+                <div
+                  key={idx}
+                  onClick={() => setSelectedImage(img)}
+                  style={{ 
+                    borderRadius: '12px',
+                    overflow: 'hidden',
+                    cursor: 'zoom-in',
+                    boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
+                    aspectRatio: '1 / 1',
+                    border: '1px solid rgba(255,255,255,0.05)',
+                    transition: 'transform 0.4s ease'
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.03)'}
+                  onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+                >
+                  <img src={img} alt="Interior Gallery" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                </div>
+              ))}
             </div>
           )}
 
@@ -741,133 +708,174 @@ export function InfoSection() {
 
 function ImageCarousel({ slides, isDefault, layoutType, autoSlide = true }: { slides: SlideData[], isDefault?: boolean, layoutType?: 'standard' | 'smallCarousel' | 'multiSlide' | 'plansGrid' | 'alternatingList' | 'featureGrid' | 'contactForm' | 'menuList' | 'triangleGallery', autoSlide?: boolean }) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   const isSmall = layoutType === 'smallCarousel';
   const isMulti = layoutType === 'multiSlide';
-  const slidesToShow = isMulti ? 2.5 : 1; // 2.5 makes images bigger and shows more are coming
+  const slidesToShow = isMulti ? 2.5 : 1;
   const maxIndex = Math.max(0, slides.length - Math.floor(slidesToShow));
 
   const goNext = () => setCurrentIndex((prev) => Math.min(prev + 1, maxIndex));
   const goPrev = () => setCurrentIndex((prev) => Math.max(prev - 1, 0));
 
   useEffect(() => {
-    if (!autoSlide || slides.length <= slidesToShow) return;
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
+  useEffect(() => {
+    if (!autoSlide || slides.length <= slidesToShow) return;
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
     }, 8000);
     return () => clearInterval(timer);
   }, [slides.length, maxIndex, slidesToShow, autoSlide, currentIndex]);
 
+  const currentSlide = slides[currentIndex];
+
   return (
-    <div className={`carousel-wrapper ${isSmall ? 'carousel-wrapper--small' : ''} ${isMulti ? 'carousel-wrapper--multi' : ''}`}>
-      <div
-        className="carousel-container"
-        style={
-          isSmall ? { height: 'auto', aspectRatio: '1 / 1', maxWidth: '400px' } :
-            isMulti ? { height: 'auto', aspectRatio: '1 / 1', overflow: 'hidden' } :
-              isDefault ? { height: 'auto', aspectRatio: '16 / 9' } : // Use cinematic ratio for welcome
-              {}
-        }
-      >
-        {/* The sliding images track */}
+    <div className="carousel-root" style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
+      <div className={`carousel-wrapper ${isSmall ? 'carousel-wrapper--small' : ''} ${isMulti ? 'carousel-wrapper--multi' : ''}`}>
         <div
-          className="carousel-track"
-          style={{
-            transform: `translateX(-${currentIndex * (100 / slidesToShow)}%)`,
-            width: isMulti ? '100%' : '100%',
-            transition: autoSlide ? undefined : 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-          }}
+          className="carousel-container"
+          style={
+            isSmall ? { height: 'auto', aspectRatio: '1 / 1', maxWidth: '400px' } :
+              isMulti ? { height: 'auto', aspectRatio: '1 / 1', overflow: 'hidden' } :
+                isDefault ? { height: 'auto', aspectRatio: '16 / 9' } :
+                {}
+          }
         >
-          {slides.map((slide, idx) => (
-            <div
-              key={idx}
-              className="carousel-slide"
-              style={{
-                backgroundImage: `url(${slide.imageUrl})`,
-                flex: `0 0 ${100 / slidesToShow}%`,
-                aspectRatio: isMulti ? '12 / 9' : 'unset',
-                height: isMulti ? 'auto' : '100%',
-                borderRadius: isMulti ? '12px' : '0',
-                marginRight: isMulti ? '1rem' : '0'
-              }}
-            >
-              {/* Text overlapping THIS specific image box inside the slide component */}
-              {(slide.title || slide.topText || slide.subtitle) && (
-                <div className="carousel-overlay">
-                  <div className="carousel-text-box" style={{ 
-                    background: isDefault ? 'rgba(0, 0, 0, 0.6)' : '#0f1115', 
-                    backdropFilter: 'blur(8px)',
-                    padding: '0.8rem 1.4rem', 
-                    width: isMulti ? '90%' : 'auto',
-                    borderRadius: '8px',
-                    border: isDefault ? 'none' : '1px solid #c5a059', 
-                    boxShadow: isDefault ? 'none' : '0 4px 15px rgba(0,0,0,0.5)'
-                }}>
-                    {slide.topText && (
-                      <p style={{ margin: 0, fontSize: isMulti ? '0.6rem' : '0.75rem', color: '#ccc', letterSpacing: '1px', marginBottom: '0.2rem', fontWeight: 600 }}>
-                        {slide.topText}
-                      </p>
-                    )}
-                    <h2 className="info-panel-title" style={{ 
-                      fontSize: isMulti ? '0.9rem' : '0.95rem', // Significantly smaller text
-                      marginBottom: '0', 
-                      color: '#fff', 
-                      fontWeight: 700, 
-                      lineHeight: 1.2,
-                      letterSpacing: '0.5px'
-                    }}>
-                      {slide.title}
-                    </h2>
-                    {slide.subtitle && (
-                      <p className="info-panel-subtitle" style={{ margin: 0, fontSize: '0.8rem', color: 'rgba(255,255,255,0.85)', fontWeight: 500, marginTop: '0.2rem' }}>
-                        {slide.subtitle}
-                      </p>
-                    )}
-                    {slide.stats && (
-                      <div style={{ display: 'flex', gap: '0.8rem', marginTop: '0.5rem', width: '100%', justifyContent: isDefault ? 'center' : 'flex-start' }}>
-                        {slide.stats.map((stat, sIdx) => (
-                          <div key={sIdx} style={{ display: 'flex', flexDirection: 'column', alignItems: isDefault ? 'center' : 'flex-start' }}>
-                            <span style={{ fontSize: isMulti ? '0.8rem' : '1.1rem', fontWeight: 800, color: '#fff' }}>{stat.value}</span>
-                            <span style={{ fontSize: '0.65rem', color: '#bbb', lineHeight: 1.2 }}>{stat.label}</span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
+          <div
+            className="carousel-track"
+            style={{
+              transform: `translateX(-${currentIndex * (100 / slidesToShow)}%)`,
+              width: '100%',
+              transition: autoSlide ? undefined : 'transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1)'
+            }}
+          >
+            {slides.map((slide, idx) => (
+              <div
+                key={idx}
+                className="carousel-slide"
+                style={{
+                  backgroundImage: `url(${slide.imageUrl})`,
+                  flex: `0 0 ${100 / slidesToShow}%`,
+                  aspectRatio: isMulti ? '12 / 9' : 'unset',
+                  height: isMulti ? 'auto' : '100%',
+                  borderRadius: isMulti ? '12px' : '0',
+                  marginRight: isMulti ? '1rem' : '0'
+                }}
+              >
+                {!isMobile && (slide.title || slide.topText || slide.subtitle) && (
+                  <div className="carousel-overlay">
+                    <div className="carousel-text-box" style={{ 
+                      background: isDefault ? 'rgba(0, 0, 0, 0.6)' : '#0f1115', 
+                      backdropFilter: 'blur(8px)',
+                      padding: '0.8rem 1.4rem', 
+                      width: isMulti ? '90%' : 'auto',
+                      borderRadius: '8px',
+                      border: isDefault ? 'none' : '1px solid #c5a059', 
+                      boxShadow: isDefault ? 'none' : '0 4px 15px rgba(0,0,0,0.5)'
+                  }}>
+                      {slide.topText && (
+                        <p style={{ margin: 0, fontSize: isMulti ? '0.6rem' : '0.75rem', color: '#ccc', letterSpacing: '1px', marginBottom: '0.2rem', fontWeight: 600 }}>
+                          {slide.topText}
+                        </p>
+                      )}
+                      <h2 className="info-panel-title" style={{ 
+                        fontSize: isMulti ? '0.9rem' : '0.95rem',
+                        marginBottom: '0', 
+                        color: '#fff', 
+                        fontWeight: 700, 
+                        lineHeight: 1.2,
+                        letterSpacing: '0.5px'
+                      }}>
+                        {slide.title}
+                      </h2>
+                      {slide.subtitle && (
+                        <p className="info-panel-subtitle" style={{ margin: 0, fontSize: '0.8rem', color: 'rgba(255,255,255,0.85)', fontWeight: 500, marginTop: '0.2rem' }}>
+                          {slide.subtitle}
+                        </p>
+                      )}
+                      {slide.stats && (
+                        <div style={{ display: 'flex', gap: '0.8rem', marginTop: '0.5rem', width: '100%', justifyContent: isDefault ? 'center' : 'flex-start' }}>
+                          {slide.stats.map((stat, sIdx) => (
+                            <div key={sIdx} style={{ display: 'flex', flexDirection: 'column', alignItems: isDefault ? 'center' : 'flex-start' }}>
+                              <span style={{ fontSize: isMulti ? '0.8rem' : '1.1rem', fontWeight: 800, color: '#fff' }}>{stat.value}</span>
+                              <span style={{ fontSize: '0.65rem', color: '#bbb', lineHeight: 1.2 }}>{stat.label}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
-              )}
-            </div>
-          ))}
+                )}
+              </div>
+            ))}
+          </div>
         </div>
+
+        {slides.length > 1 && autoSlide && (
+          <div className="carousel-dots-container">
+            {slides.map((_, idx) => (
+              <div
+                key={idx}
+                className={`carousel-dot ${currentIndex === idx ? 'carousel-dot--active' : ''}`}
+                onClick={() => setCurrentIndex(idx)}
+              >
+                {currentIndex === idx && (
+                  <div key={currentIndex} className="carousel-dot-fill" />
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {!autoSlide && slides.length > slidesToShow && (
+          <div className="carousel-controls">
+            <button className="carousel-ctrl-btn" onClick={goPrev}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button className="carousel-ctrl-btn" onClick={goNext}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+        )}
       </div>
 
-      {/* Loading progress dots below the image (only if autoSlide is on) */}
-      {slides.length > 1 && autoSlide && (
-        <div className="carousel-dots-container">
-          {slides.map((_, idx) => (
-            <div
-              key={idx}
-              className={`carousel-dot ${currentIndex === idx ? 'carousel-dot--active' : ''}`}
-              onClick={() => setCurrentIndex(idx)}
-            >
-              {currentIndex === idx && (
-                <div key={currentIndex} className="carousel-dot-fill" />
-              )}
+      {isMobile && currentSlide && (currentSlide.title || currentSlide.topText || currentSlide.subtitle) && (
+        <div className="carousel-mobile-content animate-slide" style={{ 
+          marginTop: '1.5rem', 
+          background: 'rgba(255, 255, 255, 0.05)', 
+          padding: '1.5rem', 
+          borderRadius: '16px',
+          border: '1px solid rgba(197, 160, 89, 0.3)',
+          textAlign: 'center'
+        }}>
+          {currentSlide.topText && (
+            <p style={{ margin: 0, fontSize: '0.75rem', color: '#c5a059', letterSpacing: '1.5px', marginBottom: '0.5rem', fontWeight: 700, textTransform: 'uppercase' }}>
+              {currentSlide.topText}
+            </p>
+          )}
+          <h2 style={{ fontSize: '1.3rem', color: '#fff', fontWeight: 800, marginBottom: '0.6rem', lineHeight: 1.2 }}>
+            {currentSlide.title}
+          </h2>
+          {currentSlide.subtitle && (
+            <p style={{ margin: 0, fontSize: '1rem', color: 'rgba(255, 255, 255, 0.8)', fontWeight: 400, lineHeight: 1.5 }}>
+              {currentSlide.subtitle}
+            </p>
+          )}
+          {currentSlide.stats && (
+            <div style={{ display: 'flex', gap: '2rem', marginTop: '1.25rem', justifyContent: 'center' }}>
+              {currentSlide.stats.map((stat, sIdx) => (
+                <div key={sIdx} style={{ display: 'flex', flexDirection: 'column' }}>
+                  <span style={{ fontSize: '1.25rem', fontWeight: 800, color: '#fff' }}>{stat.value}</span>
+                  <span style={{ fontSize: '0.7rem', color: '#aaa', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{stat.label}</span>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      )}
-
-      {/* Navigation Buttons for Manual Mode */}
-      {!autoSlide && slides.length > slidesToShow && (
-        <div className="carousel-controls">
-          <button className="carousel-ctrl-btn" onClick={goPrev}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-          </button>
-          <button className="carousel-ctrl-btn" onClick={goNext}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-          </button>
+          )}
         </div>
       )}
     </div>
