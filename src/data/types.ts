@@ -21,6 +21,8 @@ export type LanguageData = {
   slides?: SlideData[];
   plansData?: PlanItem[];
   alternatingList?: { title: string; text: string; imageUrl: string }[];
+  featureGrid?: { title: string; text: string; imageUrl: string }[];
+  panelBackground?: string;
   menuItems?: { 
     title: string; 
     subItems?: string[]; 
